@@ -126,6 +126,107 @@ function showToast(msg){$("toast").textContent=msg;$("toast").classList.add("sho
 $("saveReflection").addEventListener("click",()=>{localStorage.setItem("sp_win",$("win").value);localStorage.setItem("sp_next",$("next").value);showToast("Reflection saved on this device ✓")});
 $("resetWeek").addEventListener("click",()=>{tasks.forEach(t=>t.checked=false);updateTasks();showToast("Checklist reset")});
 try{const saved=JSON.parse(localStorage.getItem("sp_tasks")||"[]");tasks.forEach((t,i)=>t.checked=!!saved[i]);updateTasks();$("win").value=localStorage.getItem("sp_win")||"";$("next").value=localStorage.getItem("sp_next")||"";const p=JSON.parse(localStorage.getItem("sp_profile")||"null");if(p){$("studentClass").value=p.cls;$("stream").value=p.stream;$("goal").value=p.goal;$("hours").value=p.hours;$("strength").value=p.strength;}}catch(e){}
+</script><!-- STUDY BUDDY WIDGET -->
+<style>
+  #study-buddy-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 10000;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+  }
+  #buddy-speech {
+    background: #ffffff;
+    color: #2b2d42;
+    border: 2px solid #8d99ae;
+    border-radius: 18px 18px 4px 18px;
+    padding: 12px 16px;
+    max-width: 240px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    margin-bottom: 10px;
+  }
+  #buddy-avatar {
+    width: 95px;
+    height: 95px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.18));
+  }
+  #buddy-avatar:hover { transform: scale(1.12) rotate(-4deg); }
+  .buddy-selector {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 5px 8px;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  .buddy-btn {
+    border: none;
+    background: transparent;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .buddy-btn.active, .buddy-btn:hover {
+    background: #ef233c;
+    color: white;
+  }
+</style>
+
+<div id="study-buddy-container">
+  <div id="buddy-speech">"Ore wa Luffy! Target complete kiye bina sona mana hai!" 🍖</div>
+  <img id="buddy-avatar" src="https://api.iconify.design/noto:pirate-flag.svg" alt="Mascot" onclick="generateQuote()">
+  <div class="buddy-selector">
+    <button class="buddy-btn active" onclick="setBuddy('luffy', this)">👒 Luffy</button>
+    <button class="buddy-btn" onclick="setBuddy('doraemon', this)">🔔 Doraemon</button>
+    <button class="buddy-btn" onclick="setBuddy('shinchan', this)">🍫 Shin-chan</button>
+    <button class="buddy-btn" onclick="setBuddy('pikachu', this)">⚡ Pikachu</button>
+  </div>
+</div>
+
+<script>
+  const buddyData = {
+    luffy: {
+      avatar: "https://api.iconify.design/noto:pirate-flag.svg",
+      quotes: ["Ore wa Monkey D. Luffy! Study target chase karna mera dream hai! 🔥", "Mushkil syllabus dekh ke darna kaisa? Tu fighter hai! 👊", "Aaj poora chapter khatam karenge! 🍖"]
+    },
+    doraemon: {
+      avatar: "https://api.iconify.design/fluent-emoji:bell.svg",
+      quotes: ["Nobita mat bano! 25 min focus karke ek pomodoro finish karo! ⏰", "Revision time! Memory Bread se zyada regular mehnat kaam aayegi! 🍞"]
+    },
+    shinchan: {
+      avatar: "https://api.iconify.design/fluent-emoji:chocolate-bar.svg",
+      quotes: ["Arre itna serious kyu ho rahe ho? Padhai ko masti banao! 😂", "Mummy daantengi agar marks kam aaye! Ek topic aur revise kar lo! 🍫"]
+    },
+    pikachu: {
+      avatar: "https://api.iconify.design/fluent-emoji:high-voltage.svg",
+      quotes: ["Pika Pika! +25 Focus XP mil gaya! ⚡", "Thunderbolt focus! Aaj ka streak nahi tootna chahiye! 🌟"]
+    }
+  };
+  let activeBuddy = 'luffy';
+  function setBuddy(name, element) {
+    activeBuddy = name;
+    document.querySelectorAll('.buddy-btn').forEach(btn => btn.classList.remove('active'));
+    element.classList.add('active');
+    document.getElementById('buddy-avatar').src = buddyData[name].avatar;
+    generateQuote();
+  }
+  function generateQuote() {
+    const list = buddyData[activeBuddy].quotes;
+    document.getElementById('buddy-speech').innerText = list[Math.floor(Math.random() * list.length)];
+  }
 </script>
+  
 </body>
 </html>
