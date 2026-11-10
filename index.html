@@ -3,534 +3,367 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StudyPath Hub — Pan-India Gamified Portal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+  <title>StudyPath Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0b1120;
-      --card: #151f38;
-      --accent: #38bdf8;
-      --accent-gold: #facc15;
-      --text: #f8fafc;
-      --text-dim: #94a3b8;
-      --green: #22c55e;
-      --red: #ef4444;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-      padding-bottom: 80px;
+      font-family: 'Nunito', sans-serif;
+      background: #0b1120;
+      color: #f8fafc;
+      padding: 16px;
+      padding-bottom: 60px;
     }
-
-    header {
-      background: rgba(21, 31, 56, 0.95);
-      backdrop-filter: blur(8px);
-      padding: 14px 20px;
+    .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 15px;
     }
-    .brand {
-      font-family: 'Fredoka', cursive;
-      font-size: 22px;
-      font-weight: 700;
-      background: linear-gradient(90deg, #38bdf8, #818cf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .badge-xp {
-      background: var(--accent-gold);
-      color: #000;
-      font-weight: 800;
-      padding: 5px 14px;
-      border-radius: 99px;
-      font-size: 13px;
-    }
-
-    .container {
-      max-width: 680px;
-      margin: 20px auto;
-      padding: 0 16px;
-    }
-
+    .brand { font-family: 'Fredoka', cursive; font-size: 22px; color: #38bdf8; }
+    .xp-badge { background: #facc15; color: #000; font-weight: 800; padding: 4px 12px; border-radius: 20px; font-size: 13px; }
     .card {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 22px;
-      border: 1px solid rgba(255,255,255,0.07);
-      margin-bottom: 20px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+      background: #151f38;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
     }
-
-    h2, h3 { font-family: 'Fredoka', cursive; }
-    h2 { font-size: 20px; margin-bottom: 8px; }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 12px;
-    }
-    @media(max-width: 500px) { .grid-2 { grid-template-columns: 1fr; } }
-
-    label { font-size: 12px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; }
+    h2, h3 { font-family: 'Fredoka', cursive; margin-bottom: 8px; }
+    label { font-size: 12px; font-weight: 700; color: #94a3b8; display: block; margin-top: 10px; text-transform: uppercase; }
     select, input {
       width: 100%;
-      padding: 12px 14px;
-      margin-top: 5px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: #0e172a;
+      padding: 10px;
+      margin-top: 4px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: #0b1120;
       color: #fff;
-      font-family: inherit;
-      font-size: 15px;
-      outline: none;
-      display: block;
-      cursor: pointer;
+      font-size: 14px;
     }
-    select:focus, input:focus { border-color: var(--accent); }
-
-    .mascot-select-row {
+    .mascot-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
+      gap: 6px;
       margin-top: 10px;
     }
-    .m-chip {
-      background: #0e172a;
-      border: 2px solid rgba(255,255,255,0.1);
-      padding: 10px 4px;
-      border-radius: 12px;
+    .m-btn {
+      background: #0b1120;
+      border: 2px solid transparent;
+      padding: 8px 4px;
+      border-radius: 10px;
       color: #fff;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
-      text-align: center;
-      transition: all 0.2s ease;
-      user-select: none;
     }
-    .m-chip.active {
-      border-color: var(--accent);
-      background: rgba(56, 189, 248, 0.25);
-      transform: scale(1.03);
+    .m-btn.active {
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.2);
     }
-
-    .btn-create {
+    .btn-action {
       width: 100%;
-      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      background: #0284c7;
       color: #fff;
       border: none;
-      padding: 15px;
-      border-radius: 14px;
-      font-family: 'Fredoka', cursive;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 18px;
-      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.35);
-    }
-    .btn-create:active { transform: scale(0.98); }
-
-    #mission-screen { display: none; }
-
-    .buddy-dialogue-card {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: #0b1120;
-      border-radius: 16px;
       padding: 14px;
-      border-left: 4px solid var(--accent-gold);
-      margin-bottom: 20px;
-    }
-    .buddy-img {
-      width: 65px;
-      height: 65px;
-      object-fit: contain;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
-    }
-    .buddy-text {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--accent-gold);
-      white-space: pre-line;
-    }
-
-    .progress-unit {
-      margin-bottom: 12px;
-    }
-    .p-head {
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 5px;
-    }
-    .p-track {
-      background: rgba(255,255,255,0.08);
-      height: 12px;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .p-bar {
-      height: 100%;
-      border-radius: 8px;
-      background: linear-gradient(90deg, #38bdf8, #818cf8);
-      width: 0%;
-      transition: width 0.8s ease;
-    }
-
-    .timer-panel {
-      text-align: center;
-      background: #0b1120;
-      border-radius: 16px;
-      padding: 20px;
-      margin: 18px 0;
-    }
-    .timer-clock {
-      font-family: 'Fredoka', cursive;
-      font-size: 52px;
-      color: #fb923c;
-      letter-spacing: 2px;
-      margin: 6px 0;
-    }
-    .timer-btn-row {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-    }
-    .t-btn {
-      padding: 10px 24px;
       border-radius: 12px;
-      font-weight: 700;
+      font-family: 'Fredoka', cursive;
+      font-size: 17px;
       cursor: pointer;
-      border: none;
-      font-size: 14px;
-    }
-    .t-start { background: var(--green); color: #fff; }
-    .t-pause { background: var(--red); color: #fff; }
-
-    #quiz-panel {
-      display: none;
-      background: #0e172a;
-      border: 1.5px solid var(--accent);
-      border-radius: 14px;
-      padding: 16px;
       margin-top: 15px;
     }
-    .quiz-choice {
-      display: block;
-      width: 100%;
-      background: #1e293b;
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.1);
+    #screen-result { display: none; }
+    .dialogue {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #0b1120;
       padding: 12px;
+      border-radius: 12px;
+      border-left: 4px solid #facc15;
+      margin-bottom: 15px;
+    }
+    .dialogue img { width: 55px; height: 55px; object-fit: contain; }
+    .dialogue p { font-size: 13px; font-weight: 700; color: #facc15; }
+    .bar-wrap { margin-bottom: 10px; }
+    .bar-info { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+    .bar-bg { background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; overflow: hidden; }
+    .bar-fill { height: 100%; width: 0%; background: #38bdf8; transition: width 0.8s; }
+    .timer-box {
+      text-align: center;
+      background: #0b1120;
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+    .clock { font-family: 'Fredoka', cursive; font-size: 45px; color: #fb923c; margin: 6px 0; }
+    .t-btn { padding: 8px 18px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; color: #fff; }
+    #quiz-wrap { display: none; background: #0b1120; padding: 14px; border-radius: 12px; margin-top: 15px; border: 1px solid #38bdf8; }
+    .q-opt {
+      width: 100%;
+      background: #151f38;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      padding: 10px;
       margin-top: 8px;
-      border-radius: 10px;
+      border-radius: 8px;
       text-align: left;
-      font-size: 14px;
-      font-weight: 600;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <header>
+  <div class="header">
     <div class="brand">⚡ StudyPath Hub</div>
-    <div class="badge-xp">⭐ XP: <span id="xp-val">100</span></div>
-  </header>
+    <div class="xp-badge">⭐ XP: <span id="xp">100</span></div>
+  </div>
 
-  <div class="container">
-    
-    <div class="card" id="form-card">
-      <h2>🎯 Student Mission Setup</h2>
-      <p style="color: var(--text-dim); font-size: 13px;">Class 6 to 12 All-India Study Mission & Visual Chart</p>
+  <div class="card" id="form-card">
+    <h2>🎯 Plan Your Mission</h2>
 
-      <div class="grid-2">
-        <div>
-          <label>Select Standard</label>
-          <select id="class-select" onchange="onClassChange()">
-            <option value="6-8">Classes 6 to 8 (Middle School)</option>
-            <option value="9-10">Classes 9 & 10 (Secondary)</option>
-            <option value="11-12" selected>Classes 11 & 12 (Higher Secondary)</option>
-          </select>
-        </div>
-        <div>
-          <label>Subject / Stream</label>
-          <select id="stream-select" onchange="onStreamChange()">
-            <option value="Commerce: Accountancy">Commerce: Accountancy</option>
-            <option value="Commerce: Business Studies">Commerce: Business Studies</option>
-            <option value="Economics">Economics</option>
-            <option value="Science: Physics">Science: Physics</option>
-            <option value="Science: Chemistry">Science: Chemistry</option>
-            <option value="Science: Biology">Science: Biology</option>
-            <option value="Arts / Humanities">Arts / Humanities</option>
-            <option value="English Core">English Core</option>
-          </select>
-        </div>
+    <label>Standard / Class</label>
+    <select id="sel-class" onchange="applyClass()">
+      <option value="6-8">Classes 6 to 8 (Middle)</option>
+      <option value="9-10">Classes 9 & 10 (High School)</option>
+      <option value="11-12-comm">Class 11 & 12: Commerce</option>
+      <option value="11-12-sci">Class 11 & 12: Science</option>
+      <option value="11-12-arts">Class 11 & 12: Arts & Humanities</option>
+    </select>
+
+    <label>Subject</label>
+    <select id="sel-sub" onchange="applySubject()"></select>
+
+    <label>Target Topic / Chapter</label>
+    <select id="sel-ch"></select>
+
+    <div style="display: flex; gap: 10px;">
+      <div style="flex:1;">
+        <label>Days</label>
+        <input type="number" id="inp-days" value="4" min="1" max="30">
       </div>
-
-      <div class="grid-2">
-        <div>
-          <label>Target Topic / Chapter</label>
-          <select id="chapter-select">
-            <option value="Rules of Debit/Credit & Journal">Rules of Debit/Credit & Journal</option>
-            <option value="Ledger Accounts & Trial Balance">Ledger Accounts & Trial Balance</option>
-            <option value="Bank Reconciliation Statement (BRS)">Bank Reconciliation Statement (BRS)</option>
-            <option value="Depreciation & Provisions">Depreciation & Provisions</option>
-            <option value="Financial Statements of Sole Proprietorship">Financial Statements of Sole Proprietorship</option>
-          </select>
-        </div>
-        <div>
-          <label>Days Available</label>
-          <input type="number" id="study-days" value="4" min="1" max="30">
-        </div>
+      <div style="flex:1;">
+        <label>Daily Hours</label>
+        <input type="number" id="inp-hrs" value="2" min="1" max="10">
       </div>
-
-      <div style="margin-top: 14px;">
-        <label>Daily Study Time (Hours)</label>
-        <input type="number" id="daily-hours" value="2" min="1" max="10">
-      </div>
-
-      <div style="margin-top: 14px;">
-        <label>Choose Mascot Companion</label>
-        <div class="mascot-select-row">
-          <button type="button" class="m-chip active" id="chip-luffy" onclick="selectBuddy('luffy')">👒 Luffy</button>
-          <button type="button" class="m-chip" id="chip-doraemon" onclick="selectBuddy('doraemon')">🔔 Doraemon</button>
-          <button type="button" class="m-chip" id="chip-shinchan" onclick="selectBuddy('shinchan')">🍫 Shin-chan</button>
-          <button type="button" class="m-chip" id="chip-pikachu" onclick="selectBuddy('pikachu')">⚡ Pikachu</button>
-        </div>
-      </div>
-
-      <button type="button" class="btn-create" onclick="generateMissionPlan()">🚀 Generate Action Chart</button>
     </div>
 
-    <div class="card" id="mission-screen">
-      <h2>📊 Live Study Chart & Schedule</h2>
-
-      <div class="buddy-dialogue-card">
-        <img id="mascot-avatar" class="buddy-img" src="" alt="Mascot">
-        <div class="buddy-text" id="mascot-dialogue"></div>
-      </div>
-
-      <div style="background:#0b1120; border-radius:14px; padding:16px; margin: 15px 0;">
-        <div class="progress-unit">
-          <div class="p-head">
-            <span>Stage 1: Core Concepts & NCERT Theory</span>
-            <span id="stg1-txt">40% Time</span>
-          </div>
-          <div class="p-track"><div class="p-bar" id="bar1"></div></div>
-        </div>
-
-        <div class="progress-unit">
-          <div class="p-head">
-            <span>Stage 2: Solved Examples & NCERT Exercises</span>
-            <span id="stg2-txt">35% Time</span>
-          </div>
-          <div class="p-track"><div class="p-bar" id="bar2"></div></div>
-        </div>
-
-        <div class="progress-unit">
-          <div class="p-head">
-            <span>Stage 3: Quick Flash Revision & Checkpoint Quiz</span>
-            <span id="stg3-txt">25% Time</span>
-          </div>
-          <div class="p-track"><div class="p-bar" id="bar3"></div></div>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-        <div style="flex:1; background:#0b1120; padding:10px; border-radius:12px; text-align:center;">
-          <div style="font-size: 11px; color:var(--text-dim);">Total Hours</div>
-          <div id="stat-hrs" style="font-size:16px; font-weight:800; color:var(--accent);">8 Hrs</div>
-        </div>
-        <div style="flex:1; background:#0b1120; padding:10px; border-radius:12px; text-align:center;">
-          <div style="font-size: 11px; color:var(--text-dim);">Daily Schedule</div>
-          <div id="stat-daily" style="font-size:16px; font-weight:800; color:var(--accent-gold);">2 Hrs/Day</div>
-        </div>
-        <div style="flex:1; background:#0b1120; padding:10px; border-radius:12px; text-align:center;">
-          <div style="font-size: 11px; color:var(--text-dim);">Streak Bonus</div>
-          <div style="font-size:16px; font-weight:800; color:var(--green);">+100 XP ⚡</div>
-        </div>
-      </div>
-
-      <div class="timer-panel">
-        <h3>⏱️ Study Sprint Timer</h3>
-        <p style="font-size: 12px; color: var(--text-dim); margin-bottom: 6px;">Timer complete hone par checkpoint quiz pop-up hogi!</p>
-        <div class="timer-clock" id="clock-display">25:00</div>
-        <div class="timer-btn-row">
-          <button type="button" class="t-btn t-start" onclick="startSprintTimer()">Start Focus</button>
-          <button type="button" class="t-btn t-pause" onclick="pauseSprintTimer()">Pause</button>
-        </div>
-      </div>
-
-      <div id="quiz-panel">
-        <h3>🧠 Checkpoint Quiz Challenge</h3>
-        <p id="quiz-q" style="font-size: 14px; font-weight: 700; margin: 8px 0;"></p>
-        <div id="quiz-opts"></div>
-      </div>
-
+    <label>Choose Mascot</label>
+    <div class="mascot-row">
+      <button type="button" class="m-btn active" onclick="setMascot('luffy', this)">👒 Luffy</button>
+      <button type="button" class="m-btn" onclick="setMascot('doraemon', this)">🔔 Doraemon</button>
+      <button type="button" class="m-btn" onclick="setMascot('shinchan', this)">🍫 Shin-chan</button>
+      <button type="button" class="m-btn" onclick="setMascot('pikachu', this)">⚡ Pikachu</button>
     </div>
 
+    <button type="button" class="btn-action" onclick="makeChart()">🚀 Generate Action Chart</button>
+  </div>
+
+  <div class="card" id="screen-result">
+    <h2>📊 Mission Action Chart</h2>
+
+    <div class="dialogue">
+      <img id="m-pic" src="" alt="Mascot">
+      <p id="m-quote"></p>
+    </div>
+
+    <div class="bar-wrap">
+      <div class="bar-info"><span>Concept Clarity & NCERT</span><span id="t1">40%</span></div>
+      <div class="bar-bg"><div class="bar-fill" id="b1"></div></div>
+    </div>
+    <div class="bar-wrap">
+      <div class="bar-info"><span>Question Practice & Numerical/Notes</span><span id="t2">35%</span></div>
+      <div class="bar-bg"><div class="bar-fill" id="b2"></div></div>
+    </div>
+    <div class="bar-wrap">
+      <div class="bar-info"><span>Speed Revision & Quiz Check</span><span id="t3">25%</span></div>
+      <div class="bar-bg"><div class="bar-fill" id="b3"></div></div>
+    </div>
+
+    <div class="timer-box">
+      <h3>⏱️ Focus Sprint Timer</h3>
+      <div class="clock" id="timer-txt">25:00</div>
+      <button type="button" class="t-btn" style="background:#22c55e;" onclick="startClock()">Start</button>
+      <button type="button" class="t-btn" style="background:#ef4444;" onclick="pauseClock()">Pause</button>
+    </div>
+
+    <div id="quiz-wrap">
+      <h3>🧠 Quick Checkpoint Quiz</h3>
+      <p id="q-txt" style="margin: 8px 0; font-weight: 700;"></p>
+      <div id="q-choices"></div>
+    </div>
   </div>
 
   <script>
-    var audioCtx = null;
-    function playBeep(freq, dur) {
-      try {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        var osc = audioCtx.createOscillator();
-        var gain = audioCtx.createGain();
-        osc.frequency.value = freq || 500;
-        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (dur || 0.12));
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + (dur || 0.12));
-      } catch (e) {}
-    }
-
-    var curriculum = {
+    var db = {
       "6-8": {
-        "Mathematics": ["Integers & Fractions", "Algebra Basics", "Simple Equations", "Perimeter & Area", "Rational Numbers"],
-        "Science": ["Food & Nutrition", "Motion and Measurement", "Acids, Bases & Salts", "Light, Shadows & Reflection", "Cell Structure"],
-        "Social Science": ["Our Pasts (History)", "The Earth Our Habitat (Geography)", "Social and Political Life (Civics)"],
-        "English": ["Honeysuckle Grammar & Prose", "Reading Comprehension", "Informal Letter & Diary Entry"]
+        "Mathematics": ["Integers & Fractions", "Algebra Basics", "Simple Equations", "Perimeter and Area"],
+        "Science": ["Food & Nutrition", "Motion & Measurement", "Acids, Bases & Salts", "Light & Reflection"],
+        "Social Science": ["Our Pasts (History)", "The Earth Our Habitat", "Civics: Social & Political Life"],
+        "English": ["Honeysuckle Grammar", "Reading Comprehension", "Letter Writing"]
       },
       "9-10": {
-        "Mathematics": ["Real Numbers & Polynomials", "Pair of Linear Equations", "Quadratic Equations", "Triangles & Trigonometry", "Statistics & Probability"],
-        "Science (Physics & Chem)": ["Chemical Reactions & Equations", "Acids, Bases and Salts", "Metals and Non-metals", "Light - Reflection & Refraction", "Electricity & Magnetic Effects"],
-        "Science (Biology)": ["Life Processes", "Control and Coordination", "How do Organisms Reproduce?", "Heredity and Evolution"],
-        "Social Science": ["Nationalism in India (History)", "Resources and Development (Geography)", "Democratic Politics (Civics)", "Economics (Development)"],
-        "English": ["First Flight Prose & Poetry", "Footprints Without Feet", "Analytical Paragraph & Letters"]
+        "Mathematics": ["Real Numbers & Polynomials", "Linear Equations in Two Variables", "Quadratic Equations", "Trigonometry Basics", "Statistics & Probability"],
+        "Science": ["Chemical Reactions & Equations", "Acids, Bases & Salts", "Life Processes (Bio)", "Light - Reflection & Refraction", "Electricity"],
+        "Social Science": ["Nationalism in India", "Resources & Development", "Democratic Politics", "Economics: Development"],
+        "English": ["First Flight Prose", "Analytical Paragraph", "Grammar & Reported Speech"]
       },
-      "11-12": {
-        "Commerce: Accountancy": ["Rules of Debit/Credit & Journal", "Ledger Accounts & Trial Balance", "Bank Reconciliation Statement (BRS)", "Depreciation & Provisions", "Financial Statements of Sole Proprietorship"],
-        "Commerce: Business Studies": ["Nature & Purpose of Business", "Forms of Business Organisation", "Sources of Business Finance", "Small Business and Enterprises", "Internal Trade"],
-        "Economics": ["Consumer's Equilibrium & Demand", "Elasticity of Demand", "Production Function & Cost", "Measures of Central Tendency (Mean/Median)", "National Income Accounting"],
-        "Science: Physics": ["Units & Measurements", "Motion in a Straight Line", "Laws of Motion", "Work, Energy and Power", "Rotational Motion & Gravitation"],
-        "Science: Chemistry": ["Some Basic Concepts of Chemistry", "Structure of Atom", "Classification of Elements", "Chemical Bonding & Molecular Structure", "Thermodynamics"],
-        "Science: Biology": ["The Living World & Biological Classification", "Plant & Animal Kingdom", "Cell: The Unit of Life", "Photosynthesis & Respiration"],
-        "Arts / Humanities": ["History: Themes in World History", "Political Science: Indian Constitution at Work", "Geography: Fundamentals of Physical Geography"],
-        "English Core": ["The Portrait of a Lady & Hornbill", "Snapshots Prose", "Notice, Note-Making & Speech"]
+      "11-12-comm": {
+        "Accountancy": ["Rules of Debit & Credit", "Journal & Ledger", "Bank Reconciliation (BRS)", "Depreciation & Provisions", "Financial Statements"],
+        "Business Studies": ["Nature & Purpose of Business", "Forms of Business Org", "Sources of Business Finance", "Internal Trade"],
+        "Economics": ["Consumer Equilibrium & Demand", "Elasticity of Demand", "Production & Cost", "Measures of Central Tendency"],
+        "English Core": ["The Portrait of a Lady", "We're Not Afraid to Die", "Note Making & Summary", "Notice Writing"]
+      },
+      "11-12-sci": {
+        "Physics": ["Units & Measurement", "Motion in a Straight Line", "Laws of Motion", "Work, Energy & Power", "Gravitation"],
+        "Chemistry": ["Some Basic Concepts of Chemistry", "Structure of Atom", "Chemical Bonding", "Thermodynamics"],
+        "Mathematics": ["Sets & Relations", "Trigonometric Functions", "Complex Numbers", "Limits & Derivatives"],
+        "Biology": ["The Living World", "Biological Classification", "Cell: Unit of Life", "Photosynthesis in Higher Plants"]
+      },
+      "11-12-arts": {
+        "History": ["Writing and City Life", "An Empire Across Three Continents", "Nomadic Empires"],
+        "Political Science": ["Constitution: Why and How?", "Rights in Indian Constitution", "Election and Representation"],
+        "Geography": ["Geography as a Discipline", "Origin & Evolution of the Earth", "Interior of the Earth"]
       }
     };
 
     var buddies = {
       luffy: {
         img: "https://upload.wikimedia.org/wikipedia/en/c/cb/Monkey_D_Luffy.png",
-        quote: "Ore wa Luffy! Target lock kar liya hai, ab poora syllabus conquer karenge! Give up karna mana hai! 🍖🔥"
+        quote: "Ore wa Luffy! Target decide ho gaya, ab plan conquer karne se pehle rukna mana hai! 🍖🔥"
       },
       doraemon: {
         img: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
-        quote: "Maine schedule optimize kar diya hai! Nobita ki tarah procrastinate mat karo, timer start karke padho! 🔔"
+        quote: "Maine schedule bana diya hai! Nobita mat bano, focus sprint start karo! 🔔"
       },
       shinchan: {
         img: "https://upload.wikimedia.org/wikipedia/en/7/70/Shin-chan.png",
-        quote: "Arre itna serious mat bano! Masti aur focus sath chalega, target complete karke choco-chips khayenge! 😂🍫"
+        quote: "Arre waah! Itna disciplined plan? Ek round timer complete karo, choco-chips milenge! 😂🍫"
       },
       pikachu: {
         img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-        quote: "Pika-Pikachu! Focus streak banaye rakho, session ke baad quiz crack karke +50 XP earn karenge! ⚡🌟"
+        quote: "Pika-Pikachu! Focus streak banaye rakho, quiz crack karke +50 XP earn karo! ⚡🌟"
       }
     };
 
-    var currentBuddy = 'luffy';
+    var currentMascot = 'luffy';
 
-    function onClassChange() {
-      playBeep(450, 0.08);
-      var cls = document.getElementById('class-select').value;
-      var strSelect = document.getElementById('stream-select');
-      strSelect.innerHTML = '';
-
-      var subs = Object.keys(curriculum[cls]);
+    function applyClass() {
+      var cls = document.getElementById('sel-class').value;
+      var subSel = document.getElementById('sel-sub');
+      subSel.innerHTML = '';
+      var subs = Object.keys(db[cls]);
       subs.forEach(function(s) {
         var opt = document.createElement('option');
         opt.value = s;
         opt.textContent = s;
-        strSelect.appendChild(opt);
+        subSel.appendChild(opt);
       });
-      onStreamChange();
+      applySubject();
     }
 
-    function onStreamChange() {
-      playBeep(480, 0.08);
-      var cls = document.getElementById('class-select').value;
-      var sub = document.getElementById('stream-select').value;
-      var chSelect = document.getElementById('chapter-select');
-      chSelect.innerHTML = '';
-
-      if (curriculum[cls] && curriculum[cls][sub]) {
-        curriculum[cls][sub].forEach(function(ch) {
+    function applySubject() {
+      var cls = document.getElementById('sel-class').value;
+      var sub = document.getElementById('sel-sub').value;
+      var chSel = document.getElementById('sel-ch');
+      chSel.innerHTML = '';
+      if (db[cls] && db[cls][sub]) {
+        db[cls][sub].forEach(function(ch) {
           var opt = document.createElement('option');
           opt.value = ch;
           opt.textContent = ch;
-          chSelect.appendChild(opt);
+          chSel.appendChild(opt);
         });
       }
     }
 
-    function selectBuddy(name) {
-      playBeep(640, 0.1);
-      currentBuddy = name;
-      document.querySelectorAll('.m-chip').forEach(function(b) {
-        b.classList.remove('active');
-      });
-      document.getElementById('chip-' + name).classList.add('active');
+    function setMascot(key, btn) {
+      currentMascot = key;
+      document.querySelectorAll('.m-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
     }
 
-    function generateMissionPlan() {
-      playBeep(880, 0.2);
-      var days = parseInt(document.getElementById('study-days').value) || 1;
-      var hrs = parseInt(document.getElementById('daily-hours').value) || 1;
-      var totalHrs = days * hrs;
-      var sub = document.getElementById('stream-select').value;
-      var chapter = document.getElementById('chapter-select').value;
+    function makeChart() {
+      var d = parseInt(document.getElementById('inp-days').value) || 1;
+      var h = parseInt(document.getElementById('inp-hrs').value) || 1;
+      var total = d * h;
+      var sub = document.getElementById('sel-sub').value;
+      var ch = document.getElementById('sel-ch').value;
 
-      document.getElementById('mission-screen').style.display = 'block';
-      document.getElementById('mascot-avatar').src = buddies[currentBuddy].img;
-      document.getElementById('mascot-dialogue').innerText = '"' + buddies[currentBuddy].quote + '"\n\n🎯 Mission: ' + sub + ' — ' + chapter;
+      document.getElementById('screen-result').style.display = 'block';
+      document.getElementById('m-pic').src = buddies[currentMascot].img;
+      document.getElementById('m-quote').textContent = buddies[currentMascot].quote + ' (Target: ' + sub + ' - ' + ch + ')';
 
-      document.getElementById('stat-hrs').innerText = totalHrs + ' Hours';
-      document.getElementById('stat-daily').innerText = hrs + ' Hrs/Day (' + days + 'd)';
-
-      document.getElementById('stg1-txt').innerText = (totalHrs * 0.4).toFixed(1) + ' Hrs (40%)';
-      document.getElementById('stg2-txt').innerText = (totalHrs * 0.35).toFixed(1) + ' Hrs (35%)';
-      document.getElementById('stg3-txt').innerText = (totalHrs * 0.25).toFixed(1) + ' Hrs (25%)';
+      document.getElementById('t1').textContent = (total * 0.4).toFixed(1) + ' hrs (40%)';
+      document.getElementById('t2').textContent = (total * 0.35).toFixed(1) + ' hrs (35%)';
+      document.getElementById('t3').textContent = (total * 0.25).toFixed(1) + ' hrs (25%)';
 
       setTimeout(function() {
-        document.getElementById('bar1').style.width = '40%';
-        document.getElementById('bar2').style.width = '35%';
-        document.getElementById('bar3').style.width = '25%';
+        document.getElementById('b1').style.width = '40%';
+        document.getElementById('b2').style.width = '35%';
+        document.getElementById('b3').style.width = '25%';
       }, 100);
 
-      document.getElementById('mission-screen').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('screen-result').scrollIntoView({ behavior: 'smooth' });
     }
 
     var timeLeft = 25 * 60;
     var timerId = null;
 
-    function startSprintTimer() {
-      playBeep(750, 0.12);
+    function startClock() {
       if (timerId) return;
       timerId = setInterval(function() {
         if (timeLeft <= 0) {
           clearInterval(timerId);
           timerId = null;
-          playBeep(920, 0.3);
-          alert("🎉 Round Complete! Checkpoint Quiz unlocked!");
-          showQuiz();
+          alert("🎉 Time's up! Quick quiz unlocked!");
+          openQuiz();
         } else {
           timeLeft--;
-       
+          var m = Math.floor(timeLeft / 60);
+          var s = timeLeft % 60;
+          document.getElementById('timer-txt').textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+        }
+      }, 1000);
+    }
+
+    function pauseClock() {
+      clearInterval(timerId);
+      timerId = null;
+    }
+
+    function openQuiz() {
+      var box = document.getElementById('quiz-wrap');
+      box.style.display = 'block';
+      document.getElementById('q-txt').textContent = "Revision Check: Is consistent self-study the key to mastering this chapter?";
+      var cBox = document.getElementById('q-choices');
+      cBox.innerHTML = '';
+
+      var opt1 = document.createElement('button');
+      opt1.className = 'q-opt';
+      opt1.textContent = "Yes, regular practice and revision build full clarity!";
+      opt1.onclick = function() {
+        alert("🌟 Sahi jawab! +50 XP added!");
+        var xp = document.getElementById('xp');
+        xp.textContent = parseInt(xp.textContent) + 50;
+      };
+
+      var opt2 = document.createElement('button');
+      opt2.className = 'q-opt';
+      opt2.textContent = "No, one-night study is enough.";
+      opt2.onclick = function() {
+        alert("❌ Galat! Consistency se hi topper banenge!");
+      };
+
+      cBox.appendChild(opt1);
+      cBox.appendChild(opt2);
+      box.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    applyClass();
+  </script>
+</body>
+</html>
