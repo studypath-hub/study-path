@@ -3,389 +3,373 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StudyPath Hub — Gamified Learning</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <title>StudyPath Hub — Pan-India Gamified Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f172a;
-      --card-bg: #1e293b;
+      --bg: #0b1120;
+      --card: #151f38;
       --accent: #38bdf8;
-      --accent-orange: #f97316;
-      --accent-yellow: #facc15;
+      --accent-gold: #facc15;
       --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --success: #22c55e;
+      --text-dim: #94a3b8;
+      --green: #22c55e;
+      --red: #ef4444;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Nunito', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
-      padding-bottom: 90px;
+      line-height: 1.5;
+      padding-bottom: 80px;
     }
 
     header {
-      background: rgba(30, 41, 59, 0.85);
-      backdrop-filter: blur(10px);
-      padding: 16px 24px;
+      background: rgba(21, 31, 56, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 14px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 2px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .logo {
+    .brand {
       font-family: 'Fredoka', cursive;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 700;
-      background: linear-gradient(45deg, #38bdf8, #818cf8);
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .badge-xp {
-      background: var(--accent-yellow);
+      background: var(--accent-gold);
       color: #000;
       font-weight: 800;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 14px;
+      padding: 5px 14px;
+      border-radius: 99px;
+      font-size: 13px;
     }
 
     .container {
-      max-width: 800px;
-      margin: 25px auto;
+      max-width: 680px;
+      margin: 20px auto;
       padding: 0 16px;
     }
 
     .card {
-      background: var(--card-bg);
+      background: var(--card);
       border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.06);
-      margin-bottom: 25px;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
     }
 
-    h2, h3 { font-family: 'Fredoka', cursive; color: var(--text); }
-    h2 { font-size: 24px; margin-bottom: 12px; }
+    h2, h3 { font-family: 'Fredoka', cursive; }
+    h2 { font-size: 20px; margin-bottom: 8px; }
 
-    /* Form Inputs */
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-top: 15px;
+      gap: 12px;
+      margin-top: 12px;
     }
-    @media(max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+    @media(max-width: 500px) { .grid-2 { grid-template-columns: 1fr; } }
 
-    label { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    label { font-size: 12px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; }
     select, input {
       width: 100%;
-      padding: 12px 14px;
-      margin-top: 6px;
+      padding: 11px 12px;
+      margin-top: 5px;
       border-radius: 12px;
-      border: 1.5px solid rgba(255,255,255,0.15);
-      background: #0b1329;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #0b1120;
       color: #fff;
       font-family: inherit;
-      font-size: 15px;
+      font-size: 14px;
       outline: none;
     }
     select:focus, input:focus { border-color: var(--accent); }
 
-    .btn-main {
-      width: 100%;
-      background: linear-gradient(135deg, #38bdf8, #3b82f6);
-      color: #fff;
-      border: none;
-      padding: 14px;
-      border-radius: 14px;
-      font-size: 17px;
-      font-weight: 800;
-      font-family: 'Fredoka', cursive;
-      cursor: pointer;
-      margin-top: 20px;
-      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
-      transition: transform 0.2s;
-    }
-    .btn-main:active { transform: scale(0.98); }
-
-    /* Mascot Selector Bar */
-    .mascot-picker {
-      display: flex;
-      gap: 10px;
+    .mascot-select-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
       margin-top: 10px;
     }
-    .m-btn {
-      flex: 1;
-      padding: 10px;
-      background: #0b1329;
+    .m-chip {
+      background: #0b1120;
       border: 2px solid transparent;
-      border-radius: 14px;
+      padding: 8px 4px;
+      border-radius: 12px;
       color: #fff;
-      cursor: pointer;
+      font-size: 12px;
       font-weight: 700;
-      font-size: 13px;
+      cursor: pointer;
+      text-align: center;
       transition: 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
     }
-    .m-btn.active {
+    .m-chip.active {
       border-color: var(--accent);
       background: rgba(56, 189, 248, 0.15);
     }
 
-    /* Output Section */
-    #plan-output { display: none; }
+    .btn-create {
+      width: 100%;
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 14px;
+      font-family: 'Fredoka', cursive;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 18px;
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.35);
+    }
+    .btn-create:active { transform: scale(0.98); }
 
-    /* Mascot Dialogue Box */
-    .mentor-box {
+    /* Output Section */
+    #mission-screen { display: none; }
+
+    .buddy-dialogue-card {
       display: flex;
       align-items: center;
-      gap: 16px;
-      background: #0f172a;
+      gap: 14px;
+      background: #0b1120;
       border-radius: 16px;
-      padding: 16px;
-      border: 2px dashed rgba(255,255,255,0.15);
+      padding: 14px;
+      border-left: 4px solid var(--accent-gold);
       margin-bottom: 20px;
     }
-    .mentor-avatar {
-      width: 70px;
-      height: 70px;
+    .buddy-img {
+      width: 65px;
+      height: 65px;
       object-fit: contain;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
-      animation: bounce 2s infinite ease-in-out;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
     }
-    .mentor-speech {
-      font-size: 15px;
+    .buddy-text {
+      font-size: 14px;
       font-weight: 700;
-      color: var(--accent-yellow);
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+      color: var(--accent-gold);
     }
 
-    /* Graphic Timeline Bar Chart */
-    .chart-container {
-      background: #0b1329;
-      border-radius: 14px;
-      padding: 18px;
-      margin: 16px 0;
+    /* Visual Bars */
+    .progress-unit {
+      margin-bottom: 12px;
     }
-    .chart-bar {
-      margin-bottom: 14px;
-    }
-    .chart-label {
+    .p-head {
       display: flex;
       justify-content: space-between;
       font-size: 13px;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
-    .bar-bg {
-      background: rgba(255,255,255,0.1);
-      height: 14px;
-      border-radius: 10px;
+    .p-track {
+      background: rgba(255,255,255,0.08);
+      height: 12px;
+      border-radius: 8px;
       overflow: hidden;
     }
-    .bar-fill {
+    .p-bar {
       height: 100%;
-      border-radius: 10px;
+      border-radius: 8px;
       background: linear-gradient(90deg, #38bdf8, #818cf8);
       width: 0%;
-      transition: width 1s ease;
+      transition: width 0.8s ease;
     }
 
-    /* Timer Widget */
-    .timer-wrap {
+    /* Timer */
+    .timer-panel {
       text-align: center;
-      background: #0b1329;
+      background: #0b1120;
       border-radius: 16px;
-      padding: 24px;
-      border: 1px solid rgba(255,255,255,0.1);
+      padding: 20px;
+      margin: 18px 0;
     }
-    .timer-display {
+    .timer-clock {
       font-family: 'Fredoka', cursive;
-      font-size: 55px;
-      font-weight: 700;
-      color: var(--accent-orange);
+      font-size: 52px;
+      color: #fb923c;
       letter-spacing: 2px;
-      margin: 10px 0;
+      margin: 6px 0;
     }
-    .timer-actions {
+    .timer-btn-row {
       display: flex;
       justify-content: center;
       gap: 12px;
     }
-    .btn-timer {
-      padding: 10px 22px;
-      border-radius: 12px;
-      font-weight: 800;
+    .t-btn {
+      padding: 8px 20px;
+      border-radius: 10px;
+      font-weight: 700;
       cursor: pointer;
       border: none;
-      font-size: 14px;
+      font-size: 13px;
     }
-    .btn-timer.start { background: var(--success); color: #fff; }
-    .btn-timer.pause { background: #ef4444; color: #fff; }
+    .t-start { background: var(--green); color: #fff; }
+    .t-pause { background: var(--red); color: #fff; }
 
-    /* Quiz Box */
-    #quiz-box {
+    /* Quiz Container */
+    #quiz-panel {
       display: none;
-      margin-top: 25px;
-      background: #111c38;
-      border: 2px solid var(--accent);
-      border-radius: 16px;
-      padding: 20px;
+      background: #0e172a;
+      border: 1.5px solid var(--accent);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 15px;
     }
-    .quiz-opt {
+    .quiz-choice {
       display: block;
       width: 100%;
       background: #1e293b;
       color: #fff;
-      border: 1px solid rgba(255,255,255,0.15);
-      padding: 12px;
-      margin-top: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 12px;
+      margin-top: 8px;
       border-radius: 10px;
       text-align: left;
-      font-size: 14px;
-      font-weight: 700;
+      font-size: 13px;
+      font-weight: 600;
       cursor: pointer;
-      transition: 0.2s;
     }
-    .quiz-opt:hover { background: #2e3d57; }
+    .quiz-choice:hover { background: #334155; }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo">⚡ StudyPath Hub</div>
-    <div class="badge-xp">⭐ XP: <span id="user-xp">100</span></div>
+    <div class="brand">⚡ StudyPath Hub</div>
+    <div class="badge-xp">⭐ XP: <span id="xp-val">100</span></div>
   </header>
 
   <div class="container">
     
-    <!-- STEP 1: PLAN GENERATOR FORM -->
-    <div class="card" id="input-card">
-      <h2>🎯 Step 1: Customize Your Mission</h2>
-      <p style="color: var(--text-muted); font-size: 14px;">Apna subject aur goal choose kar, mascot chart bana ke dega!</p>
+    <!-- PLAN CREATOR CARD -->
+    <div class="card" id="form-card">
+      <h2>🎯 Student Mission Setup</h2>
+      <p style="color: var(--text-dim); font-size: 13px;">Class 6 to 12 CBSE/State boards personalized mission planner.</p>
 
       <div class="grid-2">
         <div>
-          <label>Stream / Subject</label>
-          <select id="subject-select" onchange="updateChapters()">
-            <option value="Accounts">Commerce: Accountancy</option>
-            <option value="BST">Commerce: Business Studies</option>
-            <option value="Economics">Economics</option>
-            <option value="English">English Core</option>
-            <option value="PE">Physical Education</option>
+          <label>Select Standard</label>
+          <select id="class-select" onchange="loadStreamsAndSubjects()">
+            <option value="6-8">Classes 6 to 8 (Middle School)</option>
+            <option value="9-10">Classes 9 & 10 (Secondary)</option>
+            <option value="11-12" selected>Classes 11 & 12 (Higher Secondary)</option>
           </select>
         </div>
         <div>
-          <label>Target Chapter / Unit</label>
-          <select id="chapter-select">
-            <!-- Populated dynamically via JS -->
+          <label>Subject / Stream</label>
+          <select id="stream-select" onchange="loadChapters()">
+            <!-- Dynamic streams -->
           </select>
         </div>
       </div>
 
       <div class="grid-2">
+        <div>
+          <label>Target Topic / Chapter</label>
+          <select id="chapter-select"></select>
+        </div>
         <div>
           <label>Days Available</label>
-          <input type="number" id="study-days" value="5" min="1" max="30">
-        </div>
-        <div>
-          <label>Daily Study Time (Hours)</label>
-          <input type="number" id="study-hours" value="2" min="1" max="10">
+          <input type="number" id="study-days" value="4" min="1" max="30">
         </div>
       </div>
 
-      <div style="margin-top: 15px;">
-        <label>Pick Your Study Buddy</label>
-        <div class="mascot-picker">
-          <button type="button" class="m-btn active" onclick="pickMascot('luffy', this)">👒 Luffy</button>
-          <button type="button" class="m-btn" onclick="pickMascot('doraemon', this)">🔔 Doraemon</button>
-          <button type="button" class="m-btn" onclick="pickMascot('shinchan', this)">🍫 Shin-chan</button>
-          <button type="button" class="m-btn" onclick="pickMascot('pikachu', this)">⚡ Pikachu</button>
+      <div style="margin-top: 14px;">
+        <label>Daily Study Time (Hours)</label>
+        <input type="number" id="daily-hours" value="2" min="1" max="10">
+      </div>
+
+      <div style="margin-top: 14px;">
+        <label>Choose Mascot Companion</label>
+        <div class="mascot-select-row">
+          <button type="button" class="m-chip active" onclick="setBuddy('luffy', this)">👒 Luffy</button>
+          <button type="button" class="m-chip" onclick="setBuddy('doraemon', this)">🔔 Doraemon</button>
+          <button type="button" class="m-chip" onclick="setBuddy('shinchan', this)">🍫 Shin-chan</button>
+          <button type="button" class="m-chip" onclick="setBuddy('pikachu', this)">⚡ Pikachu</button>
         </div>
       </div>
 
-      <button class="btn-main" onclick="generateInteractivePlan()">🚀 Generate My Action Chart</button>
+      <button class="btn-create" onclick="buildMission()">🚀 Generate Action Chart</button>
     </div>
 
-    <!-- STEP 2: THE ENGAGING ROADMAP + CHART -->
-    <div class="card" id="plan-output">
-      <h2>📊 Mission Execution Chart</h2>
-      
-      <!-- Mascot Speech Dialog -->
-      <div class="mentor-box">
-        <img id="active-mascot-img" class="mentor-avatar" src="" alt="Mascot">
-        <div class="mentor-speech" id="active-mascot-quote"></div>
+    <!-- MISSION ROADMAP & CHART -->
+    <div class="card" id="mission-screen">
+      <h2>📊 Live Study Chart & Schedule</h2>
+
+      <div class="buddy-dialogue-card">
+        <img id="mascot-avatar" class="buddy-img" src="" alt="Mascot">
+        <div class="buddy-text" id="mascot-dialogue"></div>
       </div>
 
-      <!-- Graphic Timeline Chart -->
-      <div class="chart-container">
-        <div class="chart-bar">
-          <div class="chart-label">
-            <span>Phase 1: Concept & Theory Clarity</span>
-            <span id="p1-time">40% Time</span>
+      <!-- Timeline Bars -->
+      <div style="background:#0b1120; border-radius:14px; padding:16px; margin: 15px 0;">
+        <div class="progress-unit">
+          <div class="p-head">
+            <span>Stage 1: Core Concepts & NCERT Theory</span>
+            <span id="stg1-txt">40% Time</span>
           </div>
-          <div class="bar-bg"><div class="bar-fill" id="bar-1"></div></div>
+          <div class="p-track"><div class="p-bar" id="bar1"></div></div>
         </div>
-        <div class="chart-bar">
-          <div class="chart-label">
-            <span>Phase 2: Question Practice & Solved Examples</span>
-            <span id="p2-time">35% Time</span>
+
+        <div class="progress-unit">
+          <div class="p-head">
+            <span>Stage 2: Solved Examples & NCERT Exercises</span>
+            <span id="stg2-txt">35% Time</span>
           </div>
-          <div class="bar-bg"><div class="bar-fill" id="bar-2"></div></div>
+          <div class="p-track"><div class="p-bar" id="bar2"></div></div>
         </div>
-        <div class="chart-bar">
-          <div class="chart-label">
-            <span>Phase 3: Speed Revision & Mascot Quiz</span>
-            <span id="p3-time">25% Time</span>
+
+        <div class="progress-unit">
+          <div class="p-head">
+            <span>Stage 3: Quick Flash Revision & Checkpoint Quiz</span>
+            <span id="stg3-txt">25% Time</span>
           </div>
-          <div class="bar-bg"><div class="bar-fill" id="bar-3"></div></div>
+          <div class="p-track"><div class="p-bar" id="bar3"></div></div>
         </div>
       </div>
 
-      <!-- Stats Summary -->
-      <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-        <div style="flex:1; background: #0b1329; padding: 12px; border-radius: 12px; text-align: center;">
-          <div style="font-size: 12px; color: var(--text-muted);">Total Effort</div>
-          <div id="stat-total" style="font-size: 18px; font-weight:800; color:var(--accent);">10 Hours</div>
+      <!-- Stats Grid -->
+      <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+        <div style="flex:1; background:#0b1120; padding:10px; border-radius:12px; text-align:center;">
+          <div style="font-size: 11px; color:var(--text-dim);">Total Hours</div>
+          <div id="stat-hrs" style="font-size:16px; font-weight:800; color:var(--accent);">8 Hrs</div>
         </div>
-        <div style="flex:1; background: #0b1329; padding: 12px; border-radius: 12px; text-align: center;">
-          <div style="font-size: 12px; color: var(--text-muted);">Daily Target</div>
-          <div id="stat-daily" style="font-size: 18px; font-weight:800; color:var(--accent-yellow);">2 Hrs/Day</div>
+        <div style="flex:1; background:#0b1120; padding:10px; border-radius:12px; text-align:center;">
+          <div style="font-size: 11px; color:var(--text-dim);">Daily Schedule</div>
+          <div id="stat-daily" style="font-size:16px; font-weight:800; color:var(--accent-gold);">2 Hrs/Day</div>
         </div>
-        <div style="flex:1; background: #0b1329; padding: 12px; border-radius: 12px; text-align: center;">
-          <div style="font-size: 12px; color: var(--text-muted);">Badge on Completion</div>
-          <div style="font-size: 18px; font-weight:800; color:var(--success);">Mastery 🏅</div>
-        </div>
-      </div>
-
-      <!-- STEP 3: FOCUS TIMER -->
-      <div class="timer-wrap">
-        <h3>⏱️ Round Focus Timer</h3>
-        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px;">Padhai start karne ke liye start button dabao!</p>
-        <div class="timer-display" id="time-display">25:00</div>
-        <div class="timer-actions">
-          <button class="btn-timer start" onclick="startTimer()">Start Round</button>
-          <button class="btn-timer pause" onclick="pauseTimer()">Pause</button>
+        <div style="flex:1; background:#0b1120; padding:10px; border-radius:12px; text-align:center;">
+          <div style="font-size: 11px; color:var(--text-dim);">Streak Bonus</div>
+          <div style="font-size:16px; font-weight:800; color:var(--green);">+100 XP ⚡</div>
         </div>
       </div>
 
-      <!-- STEP 4: COMPREHENSION QUIZ -->
-      <div id="quiz-box">
-        <h3>🧠 Quick Chapter Checkpoint</h3>
-        <p id="quiz-question" style="margin: 10px 0; font-size: 15px; font-weight: 700;"></p>
-        <div id="quiz-options"></div>
+      <!-- Pomodoro Timer -->
+      <div class="timer-panel">
+        <h3>⏱️ Study Sprint Timer</h3>
+        <p style="font-size: 12px; color: var(--text-dim); margin-bottom: 6px;">Start session, timer khatam hote hi mascot quiz khulegi!</p>
+        <div class="timer-clock" id="clock-display">25:00</div>
+        <div class="timer-btn-row">
+          <button class="t-btn t-start" onclick="startSprint()">Start Focus</button>
+          <button class="t-btn t-pause" onclick="pauseSprint()">Pause</button>
+        </div>
+      </div>
+
+      <!-- Checkpoint Quiz Box -->
+      <div id="quiz-panel">
+        <h3>🧠 Checkpoint Quiz Challenge</h3>
+        <p id="quiz-q" style="font-size: 14px; font-weight: 700; margin: 8px 0;"></p>
+        <div id="quiz-opts"></div>
       </div>
 
     </div>
@@ -393,162 +377,188 @@
   </div>
 
   <script>
-    // Chapter Directory
-    const chapters = {
-      Accounts: ["Journal Entries & Rules of Debit/Credit", "Ledger Accounts & Trial Balance", "Bank Reconciliation Statement (BRS)", "Depreciation & Provisions", "Financial Statements of Sole Proprietorship"],
-      BST: ["Nature & Purpose of Business", "Forms of Business Organisation", "Internal Trade", "Sources of Business Finance"],
-      Economics: ["Consumer's Equilibrium", "Theory of Demand", "Production Function", "Measures of Central Tendency (Mean, Median)"],
-      English: ["The Portrait of a Lady & Poetry", "We're Not Afraid to Die...", "Note-Making & Summarising", "Formal Letters & Speech"],
-      PE: ["Changing Trends & Career in PE", "Olympism Value Education", "Yoga & Lifestyle"]
-    };
+    // Audio Synth Engine (100% reliable sound effects)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(frequency = 520, type = 'sine', duration = 0.15) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }
 
-    // Mascot Database
-    const mascots = {
-      luffy: {
-        img: "https://upload.wikimedia.org/wikipedia/en/c/cb/Monkey_D_Luffy.png",
-        quote: "Ore wa Luffy! Target decide ho gaya, ab plan conquer karne se pehle rukna mana hai! 🍖🔥"
+    function soundSuccess() {
+      playBeep(440, 'triangle', 0.1);
+      setTimeout(() => playBeep(880, 'triangle', 0.25), 100);
+    }
+    function soundFail() {
+      playBeep(220, 'sawtooth', 0.2);
+    }
+
+    // All-India Class Curriculum Directory
+    const curriculum = {
+      "6-8": {
+        "Mathematics": ["Integers & Fractions", "Algebra Basics", "Simple Equations", "Perimeter & Area", "Rational Numbers"],
+        "Science": ["Food & Nutrition", "Motion and Measurement", "Acids, Bases & Salts", "Light, Shadows & Reflection", "Cell Structure"],
+        "Social Science": ["Our Pasts (History)", "The Earth Our Habitat (Geography)", "Social and Political Life (Civics)"],
+        "English": ["Honeysuckle Grammar & Prose", "Reading Comprehension", "Informal Letter & Diary Entry"]
       },
-      doraemon: {
-        img: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
-        quote: "Maine roadmap optimize kar diya hai! Nobita ki tarah lazy mat bano, schedule follow karo! 🔔"
+      "9-10": {
+        "Mathematics": ["Real Numbers & Polynomials", "Pair of Linear Equations", "Quadratic Equations", "Triangles & Trigonometry", "Statistics & Probability"],
+        "Science (Physics & Chem)": ["Chemical Reactions & Equations", "Acids, Bases and Salts", "Metals and Non-metals", "Light - Reflection & Refraction", "Electricity & Magnetic Effects"],
+        "Science (Biology)": ["Life Processes", "Control and Coordination", "How do Organisms Reproduce?", "Heredity and Evolution"],
+        "Social Science": ["Nationalism in India (History)", "Resources and Development (Geography)", "Democratic Politics (Civics)", "Economics (Development)"],
+        "English": ["First Flight Prose & Poetry", "Footprints Without Feet", "Analytical Paragraph & Letters"]
       },
-      shinchan: {
-        img: "https://upload.wikimedia.org/wikipedia/en/7/70/Shin-chan.png",
-        quote: "Arre waah! Itna disciplined plan? Ek round timer complete karo, phir choco-chips khayenge! 😂🍫"
-      },
-      pikachu: {
-        img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-        quote: "Pika-Pikachu! Focus mode activated! Har phase complete hone par +50 XP earn karo! ⚡🌟"
+      "11-12": {
+        "Commerce: Accountancy": ["Rules of Debit/Credit & Journal", "Ledger Accounts & Trial Balance", "Bank Reconciliation Statement (BRS)", "Depreciation & Provisions", "Financial Statements of Sole Proprietorship"],
+        "Commerce: Business Studies": ["Nature & Purpose of Business", "Forms of Business Organisation", "Sources of Business Finance", "Small Business and Enterprises", "Internal Trade"],
+        "Economics": ["Consumer's Equilibrium & Demand", "Elasticity of Demand", "Production Function & Cost", "Measures of Central Tendency (Mean/Median)", "National Income Accounting"],
+        "Science: Physics": ["Units & Measurements", "Motion in a Straight Line", "Laws of Motion", "Work, Energy and Power", "Rotational Motion & Gravitation"],
+        "Science: Chemistry": ["Some Basic Concepts of Chemistry", "Structure of Atom", "Classification of Elements", "Chemical Bonding & Molecular Structure", "Thermodynamics"],
+        "Science: Biology": ["The Living World & Biological Classification", "Plant & Animal Kingdom", "Cell: The Unit of Life", "Photosynthesis & Respiration"],
+        "Arts / Humanities": ["History: Themes in World History", "Political Science: Indian Constitution at Work", "Geography: Fundamentals of Physical Geography"],
+        "English Core": ["The Portrait of a Lady & Hornbill", "Snapshots Prose", "Notice, Note-Making & Speech"]
       }
     };
 
-    let selectedMascot = 'luffy';
+    const buddies = {
+      luffy: {
+        img: "https://upload.wikimedia.org/wikipedia/en/c/cb/Monkey_D_Luffy.png",
+        quote: "Ore wa Luffy! Target lock kar liya hai, ab poora syllabus conquer karke rahenge! Give up karna mana hai! 🍖🔥"
+      },
+      doraemon: {
+        img: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
+        quote: "Maine schedule optimize kar diya hai! Nobita ki tarah procrastinate mat karna, focus timer start karo! 🔔"
+      },
+      shinchan: {
+        img: "https://upload.wikimedia.org/wikipedia/en/7/70/Shin-chan.png",
+        quote: "Arre itna serious mat bano! Masti aur focus sath-sath chalega, timer finish karke choco-chips khayenge! 😂🍫"
+      },
+      pikachu: {
+        img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+        quote: "Pika-Pikachu! Focus streak banaye rakho, session ke baad quiz crack karke +50 XP earn karenge! ⚡🌟"
+      }
+    };
 
-    function updateChapters() {
-      const sub = document.getElementById('subject-select').value;
+    let activeBuddy = 'luffy';
+
+    function loadStreamsAndSubjects() {
+      const cls = document.getElementById('class-select').value;
+      const streamSelect = document.getElementById('stream-select');
+      streamSelect.innerHTML = '';
+      
+      const subs = Object.keys(curriculum[cls]);
+      subs.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s;
+        opt.innerText = s;
+        streamSelect.appendChild(opt);
+      });
+      loadChapters();
+    }
+
+    function loadChapters() {
+      const cls = document.getElementById('class-select').value;
+      const sub = document.getElementById('stream-select').value;
       const chSelect = document.getElementById('chapter-select');
       chSelect.innerHTML = '';
-      chapters[sub].forEach(ch => {
-        const opt = document.createElement('option');
-        opt.value = ch;
-        opt.innerText = ch;
-        chSelect.appendChild(opt);
-      });
+      
+      if(curriculum[cls] && curriculum[cls][sub]) {
+        curriculum[cls][sub].forEach(ch => {
+          const opt = document.createElement('option');
+          opt.value = ch;
+          opt.innerText = ch;
+          chSelect.appendChild(opt);
+        });
+      }
     }
-    updateChapters();
+    loadStreamsAndSubjects();
 
-    function pickMascot(key, btn) {
-      selectedMascot = key;
-      document.querySelectorAll('.m-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    function setBuddy(name, elem) {
+      playBeep(600, 'sine', 0.1);
+      activeBuddy = name;
+      document.querySelectorAll('.m-chip').forEach(b => b.classList.remove('active'));
+      elem.classList.add('active');
     }
 
-    function generateInteractivePlan() {
+    function buildMission() {
+      soundSuccess();
       const days = parseInt(document.getElementById('study-days').value) || 1;
-      const hours = parseInt(document.getElementById('study-hours').value) || 1;
-      const totalHours = days * hours;
-      const subject = document.getElementById('subject-select').value;
+      const hrs = parseInt(document.getElementById('daily-hours').value) || 1;
+      const totalHrs = days * hrs;
+      const sub = document.getElementById('stream-select').value;
       const chapter = document.getElementById('chapter-select').value;
 
-      document.getElementById('plan-output').style.display = 'block';
+      document.getElementById('mission-screen').style.display = 'block';
 
-      // Set Mascot Info
-      document.getElementById('active-mascot-img').src = mascots[selectedMascot].img;
-      document.getElementById('active-mascot-quote').innerText = `"${mascots[selectedMascot].quote}" \nTarget: ${subject} - ${chapter}`;
+      // Set Mascot Message
+      document.getElementById('mascot-avatar').src = buddies[activeBuddy].img;
+      document.getElementById('mascot-dialogue').innerText = `"${buddies[activeBuddy].quote}"\n\n📌 Target: ${sub} — ${chapter}`;
 
-      // Update Chart Stats
-      document.getElementById('stat-total').innerText = `${totalHours} Hours`;
-      document.getElementById('stat-daily').innerText = `${hours} Hrs/Day (${days} Days)`;
+      // Set Stats
+      document.getElementById('stat-hrs').innerText = `${totalHrs} Hours`;
+      document.getElementById('stat-daily').innerText = `${hrs} Hrs/Day (${days}d)`;
 
-      // Animate Bar Charts
+      // Time Distribution Calculation
+      const p1 = (totalHrs * 0.40).toFixed(1);
+      const p2 = (totalHrs * 0.35).toFixed(1);
+      const p3 = (totalHrs * 0.25).toFixed(1);
+
+      document.getElementById('stg1-txt').innerText = `${p1} Hours (40%)`;
+      document.getElementById('stg2-txt').innerText = `${p2} Hours (35%)`;
+      document.getElementById('stg3-txt').innerText = `${p3} Hours (25%)`;
+
       setTimeout(() => {
-        document.getElementById('bar-1').style.width = '40%';
-        document.getElementById('bar-2').style.width = '35%';
-        document.getElementById('bar-3').style.width = '25%';
-      }, 200);
+        document.getElementById('bar1').style.width = '40%';
+        document.getElementById('bar2').style.width = '35%';
+        document.getElementById('bar3').style.width = '25%';
+      }, 150);
 
-      document.getElementById('plan-output').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('mission-screen').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Timer Logic
+    // Pomodoro Engine
     let timeLeft = 25 * 60;
-    let timerId = null;
+    let timerRef = null;
 
-    function startTimer() {
-      if (timerId) return;
-      timerId = setInterval(() => {
+    function startSprint() {
+      playBeep(700, 'sine', 0.15);
+      if (timerRef) return;
+      timerRef = setInterval(() => {
         if (timeLeft <= 0) {
-          clearInterval(timerId);
-          timerId = null;
-          alert("🎉 Round Complete! Time for your check quiz!");
-          loadQuiz();
+          clearInterval(timerRef);
+          timerRef = null;
+          soundSuccess();
+          alert("🎉 Round Complete! Checkpoint Quiz unlocked!");
+          renderQuiz();
         } else {
           timeLeft--;
-          updateDisplay();
+          refreshTimerClock();
         }
       }, 1000);
     }
 
-    function pauseTimer() {
-      clearInterval(timerId);
-      timerId = null;
+    function pauseSprint() {
+      playBeep(350, 'sine', 0.15);
+      clearInterval(timerRef);
+      timerRef = null;
     }
 
-    function updateDisplay() {
-      const min = Math.floor(timeLeft / 60);
-      const sec = timeLeft % 60;
-      document.getElementById('time-display').innerText = 
-        `${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`;
+    function refreshTimerClock() {
+      const m = Math.floor(timeLeft / 60);
+      const s = timeLeft % 60;
+      document.getElementById('clock-display').innerText = 
+        `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
     }
 
-    // Dynamic Post-Study Quiz
-    function loadQuiz() {
-      const sub = document.getElementById('subject-select').value;
-      const qBox = document.getElementById('quiz-box');
-      const qText = document.getElementById('quiz-question');
-      const qOpts = document.getElementById('quiz-options');
-
-      qBox.style.display = 'block';
-      qOpts.innerHTML = '';
-
-      let questionData = {
-        q: "What is the primary foundation of double-entry bookkeeping?",
-        options: ["Debit what comes in, Credit what goes out", "Spend first, record later", "Only record assets", "Ignore liabilities"],
-        correct: 0
-      };
-
-      if(sub === "Economics") {
-        questionData = {
-          q: "When price rises, what generally happens to quantity demanded (Law of Demand)?",
-          options: ["Increases", "Decreases", "Stays unchanged", "Becomes zero"],
-          correct: 1
-        };
-      } else if(sub === "PE") {
-        questionData = {
-          q: "What are the core values taught in Olympism?",
-          options: ["Friendship, Respect, Excellence", "Winning at any cost", "Only physical training", "No teamwork"],
-          correct: 0
-        };
-      }
-
-      qText.innerText = questionData.q;
-      questionData.options.forEach((opt, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'quiz-opt';
-        btn.innerText = opt;
-        btn.onclick = () => {
-          if(idx === questionData.correct) {
-            alert("Correct Answer! 🌟 +50 XP added to your profile!");
-            document.getElementById('user-xp').innerText = parseInt(document.getElementById('user-xp').innerText) + 50;
-          } else {
-            alert("Oops! Revise that concept once again, you've got this!");
-          }
-        };
-        qOpts.appendChild(btn);
-      });
-
-      qBox.scrollIntoView({ behavior: 'smooth' });
-    }
-  </script>
-</body>
-</html>
+    // Dynamic Quiz Generator across Class 6 to 12
+    function renderQuiz() {
+      const cls = document.getElementById('class-select').value;
+      const sub = document.getElementById('stream-select').value
