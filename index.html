@@ -186,8 +186,7 @@ try{const saved=JSON.parse(localStorage.getItem("sp_tasks")||"[]");tasks.forEach
 
 <div id="study-buddy-container">
   <div id="buddy-speech">"Ore wa Luffy! Target complete kiye bina sona mana hai!" 🍖</div>
-  <img id="buddy-avatar" src="https://api.iconify.design/noto:pirate-flag.svg" alt="Mascot" onclick="generateQuote()">
-  <div class="buddy-selector">
+  <img id="buddy-avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Mascot" onclick="generateQuote()">
     <button class="buddy-btn active" onclick="setBuddy('luffy', this)">👒 Luffy</button>
     <button class="buddy-btn" onclick="setBuddy('doraemon', this)">🔔 Doraemon</button>
     <button class="buddy-btn" onclick="setBuddy('shinchan', this)">🍫 Shin-chan</button>
@@ -197,24 +196,38 @@ try{const saved=JSON.parse(localStorage.getItem("sp_tasks")||"[]");tasks.forEach
 
 <script>
   const buddyData = {
+    const buddyData = {
     luffy: {
-      avatar: "https://api.iconify.design/noto:pirate-flag.svg",
-      quotes: ["Ore wa Monkey D. Luffy! Study target chase karna mera dream hai! 🔥", "Mushkil syllabus dekh ke darna kaisa? Tu fighter hai! 👊", "Aaj poora chapter khatam karenge! 🍖"]
+      avatar: "https://upload.wikimedia.org/wikipedia/en/c/cb/Monkey_D_Luffy.png",
+      quotes: [
+        "Ore wa Monkey D. Luffy! Study target chase karna mera dream hai! 🔥",
+        "Mushkil syllabus dekh ke darna kaisa? Tu fighter hai! 👊",
+        "Aaj poora chapter khatam karenge! 🍖"
+      ]
     },
     doraemon: {
-      avatar: "https://api.iconify.design/fluent-emoji:bell.svg",
-      quotes: ["Nobita mat bano! 25 min focus karke ek pomodoro finish karo! ⏰", "Revision time! Memory Bread se zyada regular mehnat kaam aayegi! 🍞"]
+      avatar: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
+      quotes: [
+        "Nobita mat bano! 25 min focus karke ek pomodoro finish karo! ⏰",
+        "Revision time! Regular padhoge toh sab yaad rahega! 🍞"
+      ]
     },
     shinchan: {
-      avatar: "https://api.iconify.design/fluent-emoji:chocolate-bar.svg",
-      quotes: ["Arre itna serious kyu ho rahe ho? Padhai ko masti banao! 😂", "Mummy daantengi agar marks kam aaye! Ek topic aur revise kar lo! 🍫"]
+      avatar: "https://upload.wikimedia.org/wikipedia/en/7/70/Shin-chan.png",
+      quotes: [
+        "Arre itna serious kyu ho rahe ho? Padhai ko masti banao! 😂",
+        "Mummy daantengi agar marks kam aaye! Ek topic aur revise kar lo! 🍫"
+      ]
     },
     pikachu: {
-      avatar: "https://api.iconify.design/fluent-emoji:high-voltage.svg",
-      quotes: ["Pika Pika! +25 Focus XP mil gaya! ⚡", "Thunderbolt focus! Aaj ka streak nahi tootna chahiye! 🌟"]
+      avatar: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+      quotes: [
+        "Pika Pika! +25 Focus XP mil gaya! ⚡",
+        "Thunderbolt focus! Aaj ka streak nahi tootna chahiye! 🌟"
+      ]
     }
   };
-  let activeBuddy = 'luffy';
+  
   function setBuddy(name, element) {
     activeBuddy = name;
     document.querySelectorAll('.buddy-btn').forEach(btn => btn.classList.remove('active'));
