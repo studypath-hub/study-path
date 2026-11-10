@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>StudyPath Hub — Pan-India NCERT & Competitive Portal</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -18,7 +18,14 @@
       --dim: #94a3b8;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--bg);
@@ -78,27 +85,32 @@
     .m-btn {
       background: #090e1a;
       border: 2px solid transparent;
-      padding: 10px 2px;
+      padding: 12px 2px;
       border-radius: 12px;
       color: #fff;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
+      user-select: none;
     }
-    .m-btn.active { border-color: var(--accent); background: rgba(56, 189, 248, 0.22); }
+    .m-btn.active { border-color: var(--accent); background: rgba(56, 189, 248, 0.25); }
 
     .btn-main {
       width: 100%;
       background: linear-gradient(135deg, #0284c7, #38bdf8);
       color: #fff;
       border: none;
-      padding: 14px;
+      padding: 15px;
       border-radius: 14px;
       font-family: 'Fredoka', cursive;
-      font-size: 17px;
+      font-size: 18px;
       cursor: pointer;
       margin-top: 16px;
+      display: block;
+      text-align: center;
+      user-select: none;
     }
+    .btn-main:active { transform: scale(0.98); }
 
     #mission-view { display: none; }
 
@@ -136,7 +148,7 @@
       margin: 4px 0;
     }
     .timer-btn-row { display: flex; justify-content: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
-    .t-btn { padding: 9px 18px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; color: #fff; font-size: 13px; }
+    .t-btn { padding: 10px 18px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; color: #fff; font-size: 13px; }
 
     .live-tags {
       display: flex;
@@ -216,7 +228,7 @@
     }
   </style>
 </head>
-<body>
+<body ontouchstart="">
 
   <header>
     <div class="brand">⚡ StudyPath Hub</div>
@@ -306,13 +318,13 @@
 
     <label>Choose Mascot Partner</label>
     <div class="mascot-row">
-      <button type="button" class="m-btn active" id="btn-luffy" onclick="pickBuddy('luffy')">👒 Luffy</button>
-      <button type="button" class="m-btn" id="btn-doraemon" onclick="pickBuddy('doraemon')">🔔 Doraemon</button>
-      <button type="button" class="m-btn" id="btn-shinchan" onclick="pickBuddy('shinchan')">🍫 Shin-chan</button>
-      <button type="button" class="m-btn" id="btn-pikachu" onclick="pickBuddy('pikachu')">⚡ Pikachu</button>
+      <button type="button" class="m-btn active" id="btn-luffy" onclick="window.pickBuddy('luffy')">👒 Luffy</button>
+      <button type="button" class="m-btn" id="btn-doraemon" onclick="window.pickBuddy('doraemon')">🔔 Doraemon</button>
+      <button type="button" class="m-btn" id="btn-shinchan" onclick="window.pickBuddy('shinchan')">🍫 Shin-chan</button>
+      <button type="button" class="m-btn" id="btn-pikachu" onclick="window.pickBuddy('pikachu')">⚡ Pikachu</button>
     </div>
 
-    <button type="button" class="btn-main" onclick="startMission()">🚀 Launch Action Mission</button>
+    <button type="button" class="btn-main" onclick="window.startMission()">🚀 Launch Action Mission</button>
   </div>
 
   <div class="card" id="mission-view">
@@ -344,9 +356,9 @@
       <div class="big-clock" id="display-time">25:00</div>
       
       <div class="timer-btn-row">
-        <button type="button" class="t-btn" style="background:var(--green);" onclick="runTimer()">Start Sprint</button>
-        <button type="button" class="t-btn" style="background:var(--red);" onclick="haltTimer()">Pause</button>
-        <button type="button" class="t-btn" style="background:var(--purple);" onclick="trigger2HourGrandQuiz()">Finish & Grand Quiz 🏆</button>
+        <button type="button" class="t-btn" style="background:var(--green);" onclick="window.runTimer()">Start Sprint</button>
+        <button type="button" class="t-btn" style="background:var(--red);" onclick="window.haltTimer()">Pause</button>
+        <button type="button" class="t-btn" style="background:var(--purple);" onclick="window.trigger2HourGrandQuiz()">Finish & Grand Quiz 🏆</button>
       </div>
 
       <div class="live-tags">
@@ -363,9 +375,9 @@
       <p style="font-size:12px; color:var(--dim); margin-bottom:10px;">Sprint complete! Is checkpoint ka jawab dekar Sprint Badge unlock karo:</p>
       <div id="sq-question" style="font-weight:700; margin-bottom:10px;">What is the single most important rule to excel in this chapter?</div>
       <div id="sq-choices">
-        <button type="button" class="q-opt-btn" onclick="answerSprint(true)">Consistent conceptual practice and solving exercise questions</button>
-        <button type="button" class="q-opt-btn" onclick="answerSprint(false)">Ratta marna without understanding concepts</button>
-        <button type="button" class="q-opt-btn" onclick="answerSprint(false)">Skipping notes and reading direct on exam night</button>
+        <button type="button" class="q-opt-btn" onclick="window.answerSprint(true)">Consistent conceptual practice and solving exercise questions</button>
+        <button type="button" class="q-opt-btn" onclick="window.answerSprint(false)">Ratta marna without understanding concepts</button>
+        <button type="button" class="q-opt-btn" onclick="window.answerSprint(false)">Skipping notes and reading direct on exam night</button>
       </div>
     </div>
   </div>
@@ -376,7 +388,7 @@
       <p style="font-size:12px; color:var(--dim); margin-bottom:12px;">Hard focus complete ho gaya! Final syllabus audit report ke liye test submit karo:</p>
       <div style="margin-bottom:10px; font-weight:700;">Q1. Primary success factor in competitive/board exams?</div>
       <button type="button" class="q-opt-btn" style="background:#0284c7; margin-bottom:8px;">Consistent revision & numerical problem solving</button>
-      <button type="button" class="btn-main" style="background:var(--green); margin-top:14px;" onclick="submitGrandQuiz()">Submit & View Full Audit Chart</button>
+      <button type="button" class="btn-main" style="background:var(--green); margin-top:14px;" onclick="window.submitGrandQuiz()">Submit & View Full Audit Chart</button>
     </div>
   </div>
 
@@ -426,7 +438,7 @@
     var buddies = {
       luffy: {
         img: "https://upload.wikimedia.org/wikipedia/en/c/cb/Monkey_D_Luffy.png",
-        quote: "Ore wa Luffy! Target lock kar liya hai, jab tak syllabus conquer nahi hoga rukna mana hai! 🍖🔥"
+        quote: "Ore wa Luffy! Target lock kar liya hai, ab poora syllabus conquer karenge! 🍖🔥"
       },
       doraemon: {
         img: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
@@ -444,21 +456,23 @@
 
     var activeBuddy = 'luffy';
 
-    function pickBuddy(key) {
+    window.pickBuddy = function(key) {
       activeBuddy = key;
       document.querySelectorAll('.m-btn').forEach(function(b) { b.classList.remove('active'); });
       var el = document.getElementById('btn-' + key);
       if (el) el.classList.add('active');
-    }
+    };
 
-    function startMission() {
+    window.startMission = function() {
       var d = parseInt(document.getElementById('inp-days').value) || 5;
       var h = parseInt(document.getElementById('inp-hrs').value) || 2;
       var total = d * h;
       var sub = document.getElementById('sel-sub').value;
       var chap = document.getElementById('sel-chap').value;
 
-      document.getElementById('mission-view').style.display = 'block';
+      var view = document.getElementById('mission-view');
+      view.style.display = 'block';
+
       document.getElementById('mascot-img').src = buddies[activeBuddy].img;
       document.getElementById('mascot-quote').innerText = buddies[activeBuddy].quote + '\n\n🎯 Target: ' + sub + ' — ' + chap;
 
@@ -466,21 +480,8 @@
       document.getElementById('t-stg2').innerText = (total * 0.35).toFixed(1) + ' hrs (35%)';
       document.getElementById('t-stg3').innerText = (total * 0.25).toFixed(1) + ' hrs (25%)';
 
-      document.getElementById('mission-view').scrollIntoView({ behavior: 'smooth' });
-    }
+      view.scrollIntoView({ behavior: 'smooth' });
+    };
 
     var timerId = null;
-    var sprintSeconds = 25 * 60;
-    var totalSecondsStudied = 0;
-    var pauseCount = 0;
-    var screenExitCount = 0;
-
-    document.addEventListener("visibilitychange", function() {
-      if (document.hidden && timerId) {
-        screenExitCount++;
-        document.getElementById('stat-away').innerText = screenExitCount;
-      }
-    });
-
-    function runTimer() {
- 
+    var sprintSeconds = 25 
