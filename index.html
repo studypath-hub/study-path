@@ -17,7 +17,7 @@
       --red: #ef4444;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--bg);
@@ -84,15 +84,17 @@
     label { font-size: 12px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; }
     select, input {
       width: 100%;
-      padding: 11px 12px;
+      padding: 12px 14px;
       margin-top: 5px;
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: #0b1120;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: #0e172a;
       color: #fff;
       font-family: inherit;
-      font-size: 14px;
+      font-size: 15px;
       outline: none;
+      display: block;
+      cursor: pointer;
     }
     select:focus, input:focus { border-color: var(--accent); }
 
@@ -103,20 +105,22 @@
       margin-top: 10px;
     }
     .m-chip {
-      background: #0b1120;
-      border: 2px solid transparent;
-      padding: 8px 4px;
+      background: #0e172a;
+      border: 2px solid rgba(255,255,255,0.1);
+      padding: 10px 4px;
       border-radius: 12px;
       color: #fff;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       text-align: center;
-      transition: 0.2s;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
     }
     .m-chip.active {
       border-color: var(--accent);
-      background: rgba(56, 189, 248, 0.15);
+      background: rgba(56, 189, 248, 0.2);
+      transform: scale(1.03);
     }
 
     .btn-create {
@@ -124,18 +128,18 @@
       background: linear-gradient(135deg, #0284c7, #38bdf8);
       color: #fff;
       border: none;
-      padding: 14px;
+      padding: 15px;
       border-radius: 14px;
       font-family: 'Fredoka', cursive;
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 700;
       cursor: pointer;
       margin-top: 18px;
       box-shadow: 0 4px 20px rgba(56, 189, 248, 0.35);
+      touch-action: manipulation;
     }
     .btn-create:active { transform: scale(0.98); }
 
-    /* Output Section */
     #mission-screen { display: none; }
 
     .buddy-dialogue-card {
@@ -160,7 +164,6 @@
       color: var(--accent-gold);
     }
 
-    /* Visual Bars */
     .progress-unit {
       margin-bottom: 12px;
     }
@@ -185,7 +188,6 @@
       transition: width 0.8s ease;
     }
 
-    /* Timer */
     .timer-panel {
       text-align: center;
       background: #0b1120;
@@ -206,17 +208,17 @@
       gap: 12px;
     }
     .t-btn {
-      padding: 8px 20px;
-      border-radius: 10px;
+      padding: 10px 24px;
+      border-radius: 12px;
       font-weight: 700;
       cursor: pointer;
       border: none;
-      font-size: 13px;
+      font-size: 14px;
+      touch-action: manipulation;
     }
     .t-start { background: var(--green); color: #fff; }
     .t-pause { background: var(--red); color: #fff; }
 
-    /* Quiz Container */
     #quiz-panel {
       display: none;
       background: #0e172a;
@@ -231,15 +233,15 @@
       background: #1e293b;
       color: #fff;
       border: 1px solid rgba(255,255,255,0.1);
-      padding: 10px 12px;
+      padding: 12px;
       margin-top: 8px;
       border-radius: 10px;
       text-align: left;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
+      touch-action: manipulation;
     }
-    .quiz-choice:hover { background: #334155; }
   </style>
 </head>
 <body>
@@ -251,15 +253,14 @@
 
   <div class="container">
     
-    <!-- PLAN CREATOR CARD -->
     <div class="card" id="form-card">
       <h2>🎯 Student Mission Setup</h2>
-      <p style="color: var(--text-dim); font-size: 13px;">Class 6 to 12 CBSE/State boards personalized mission planner.</p>
+      <p style="color: var(--text-dim); font-size: 13px;">Class 6 to 12 All-India Study Mission & Visual Chart</p>
 
       <div class="grid-2">
         <div>
           <label>Select Standard</label>
-          <select id="class-select" onchange="loadStreamsAndSubjects()">
+          <select id="class-select">
             <option value="6-8">Classes 6 to 8 (Middle School)</option>
             <option value="9-10">Classes 9 & 10 (Secondary)</option>
             <option value="11-12" selected>Classes 11 & 12 (Higher Secondary)</option>
@@ -267,9 +268,7 @@
         </div>
         <div>
           <label>Subject / Stream</label>
-          <select id="stream-select" onchange="loadChapters()">
-            <!-- Dynamic streams -->
-          </select>
+          <select id="stream-select"></select>
         </div>
       </div>
 
@@ -292,17 +291,16 @@
       <div style="margin-top: 14px;">
         <label>Choose Mascot Companion</label>
         <div class="mascot-select-row">
-          <button type="button" class="m-chip active" onclick="setBuddy('luffy', this)">👒 Luffy</button>
-          <button type="button" class="m-chip" onclick="setBuddy('doraemon', this)">🔔 Doraemon</button>
-          <button type="button" class="m-chip" onclick="setBuddy('shinchan', this)">🍫 Shin-chan</button>
-          <button type="button" class="m-chip" onclick="setBuddy('pikachu', this)">⚡ Pikachu</button>
+          <button type="button" class="m-chip active" data-buddy="luffy">👒 Luffy</button>
+          <button type="button" class="m-chip" data-buddy="doraemon">🔔 Doraemon</button>
+          <button type="button" class="m-chip" data-buddy="shinchan">🍫 Shin-chan</button>
+          <button type="button" class="m-chip" data-buddy="pikachu">⚡ Pikachu</button>
         </div>
       </div>
 
-      <button class="btn-create" onclick="buildMission()">🚀 Generate Action Chart</button>
+      <button type="button" class="btn-create" id="btn-generate">🚀 Generate Action Chart</button>
     </div>
 
-    <!-- MISSION ROADMAP & CHART -->
     <div class="card" id="mission-screen">
       <h2>📊 Live Study Chart & Schedule</h2>
 
@@ -311,7 +309,6 @@
         <div class="buddy-text" id="mascot-dialogue"></div>
       </div>
 
-      <!-- Timeline Bars -->
       <div style="background:#0b1120; border-radius:14px; padding:16px; margin: 15px 0;">
         <div class="progress-unit">
           <div class="p-head">
@@ -338,7 +335,6 @@
         </div>
       </div>
 
-      <!-- Stats Grid -->
       <div style="display: flex; gap: 8px; margin-bottom: 16px;">
         <div style="flex:1; background:#0b1120; padding:10px; border-radius:12px; text-align:center;">
           <div style="font-size: 11px; color:var(--text-dim);">Total Hours</div>
@@ -354,18 +350,16 @@
         </div>
       </div>
 
-      <!-- Pomodoro Timer -->
       <div class="timer-panel">
         <h3>⏱️ Study Sprint Timer</h3>
-        <p style="font-size: 12px; color: var(--text-dim); margin-bottom: 6px;">Start session, timer khatam hote hi mascot quiz khulegi!</p>
+        <p style="font-size: 12px; color: var(--text-dim); margin-bottom: 6px;">Timer complete hone par checkpoint quiz pop-up hogi!</p>
         <div class="timer-clock" id="clock-display">25:00</div>
         <div class="timer-btn-row">
-          <button class="t-btn t-start" onclick="startSprint()">Start Focus</button>
-          <button class="t-btn t-pause" onclick="pauseSprint()">Pause</button>
+          <button type="button" class="t-btn t-start" id="btn-start-timer">Start Focus</button>
+          <button type="button" class="t-btn t-pause" id="btn-pause-timer">Pause</button>
         </div>
       </div>
 
-      <!-- Checkpoint Quiz Box -->
       <div id="quiz-panel">
         <h3>🧠 Checkpoint Quiz Challenge</h3>
         <p id="quiz-q" style="font-size: 14px; font-weight: 700; margin: 8px 0;"></p>
@@ -377,31 +371,23 @@
   </div>
 
   <script>
-    // Audio Synth Engine (100% reliable sound effects)
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    function playBeep(frequency = 520, type = 'sine', duration = 0.15) {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = type;
-      osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
+    let audioCtx = null;
+    function playBeep(freq = 520, duration = 0.12) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
     }
 
-    function soundSuccess() {
-      playBeep(440, 'triangle', 0.1);
-      setTimeout(() => playBeep(880, 'triangle', 0.25), 100);
-    }
-    function soundFail() {
-      playBeep(220, 'sawtooth', 0.2);
-    }
-
-    // All-India Class Curriculum Directory
     const curriculum = {
       "6-8": {
         "Mathematics": ["Integers & Fractions", "Algebra Basics", "Simple Equations", "Perimeter & Area", "Rational Numbers"],
@@ -431,15 +417,15 @@
     const buddies = {
       luffy: {
         img: "https://upload.wikimedia.org/wikipedia/en/c/cb/Monkey_D_Luffy.png",
-        quote: "Ore wa Luffy! Target lock kar liya hai, ab poora syllabus conquer karke rahenge! Give up karna mana hai! 🍖🔥"
+        quote: "Ore wa Luffy! Target lock kar liya hai, ab poora syllabus conquer karenge! Give up karna mana hai! 🍖🔥"
       },
       doraemon: {
         img: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
-        quote: "Maine schedule optimize kar diya hai! Nobita ki tarah procrastinate mat karna, focus timer start karo! 🔔"
+        quote: "Maine schedule optimize kar diya hai! Nobita ki tarah procrastinate mat karo, timer start karke padho! 🔔"
       },
       shinchan: {
         img: "https://upload.wikimedia.org/wikipedia/en/7/70/Shin-chan.png",
-        quote: "Arre itna serious mat bano! Masti aur focus sath-sath chalega, timer finish karke choco-chips khayenge! 😂🍫"
+        quote: "Arre itna serious mat bano! Masti aur focus sath chalega, target complete karke choco-chips khayenge! 😂🍫"
       },
       pikachu: {
         img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
@@ -449,116 +435,124 @@
 
     let activeBuddy = 'luffy';
 
-    function loadStreamsAndSubjects() {
-      const cls = document.getElementById('class-select').value;
-      const streamSelect = document.getElementById('stream-select');
-      streamSelect.innerHTML = '';
-      
-      const subs = Object.keys(curriculum[cls]);
-      subs.forEach(s => {
+    const classEl = document.getElementById('class-select');
+    const streamEl = document.getElementById('stream-select');
+    const chapterEl = document.getElementById('chapter-select');
+
+    function populateStreams() {
+      const cls = classEl.value;
+      streamEl.innerHTML = '';
+      if (!curriculum[cls]) return;
+
+      Object.keys(curriculum[cls]).forEach(s => {
         const opt = document.createElement('option');
         opt.value = s;
-        opt.innerText = s;
-        streamSelect.appendChild(opt);
+        opt.textContent = s;
+        streamEl.appendChild(opt);
       });
-      loadChapters();
+      populateChapters();
     }
 
-    function loadChapters() {
-      const cls = document.getElementById('class-select').value;
-      const sub = document.getElementById('stream-select').value;
-      const chSelect = document.getElementById('chapter-select');
-      chSelect.innerHTML = '';
-      
-      if(curriculum[cls] && curriculum[cls][sub]) {
+    function populateChapters() {
+      const cls = classEl.value;
+      const sub = streamEl.value;
+      chapterEl.innerHTML = '';
+
+      if (curriculum[cls] && curriculum[cls][sub]) {
         curriculum[cls][sub].forEach(ch => {
           const opt = document.createElement('option');
           opt.value = ch;
-          opt.innerText = ch;
-          chSelect.appendChild(opt);
+          opt.textContent = ch;
+          chapterEl.appendChild(opt);
         });
       }
     }
-    loadStreamsAndSubjects();
 
-    function setBuddy(name, elem) {
-      playBeep(600, 'sine', 0.1);
-      activeBuddy = name;
-      document.querySelectorAll('.m-chip').forEach(b => b.classList.remove('active'));
-      elem.classList.add('active');
-    }
+    classEl.addEventListener('change', populateStreams);
+    streamEl.addEventListener('change', populateChapters);
 
-    function buildMission() {
-      soundSuccess();
+    // Mascot Click Handler
+    document.querySelectorAll('.m-chip').forEach(btn => {
+      btn.addEventListener('click', function() {
+        playBeep(640, 0.1);
+        document.querySelectorAll('.m-chip').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        activeBuddy = this.getAttribute('data-buddy');
+      });
+    });
+
+    // Generate Chart Handler
+    document.getElementById('btn-generate').addEventListener('click', function() {
+      playBeep(880, 0.2);
       const days = parseInt(document.getElementById('study-days').value) || 1;
       const hrs = parseInt(document.getElementById('daily-hours').value) || 1;
       const totalHrs = days * hrs;
-      const sub = document.getElementById('stream-select').value;
-      const chapter = document.getElementById('chapter-select').value;
+      const sub = streamEl.value;
+      const chapter = chapterEl.value;
 
       document.getElementById('mission-screen').style.display = 'block';
-
-      // Set Mascot Message
       document.getElementById('mascot-avatar').src = buddies[activeBuddy].img;
-      document.getElementById('mascot-dialogue').innerText = `"${buddies[activeBuddy].quote}"\n\n📌 Target: ${sub} — ${chapter}`;
+      document.getElementById('mascot-dialogue').innerText = `"${buddies[activeBuddy].quote}"\n\n🎯 Mission: ${sub} — ${chapter}`;
 
-      // Set Stats
       document.getElementById('stat-hrs').innerText = `${totalHrs} Hours`;
       document.getElementById('stat-daily').innerText = `${hrs} Hrs/Day (${days}d)`;
 
-      // Time Distribution Calculation
-      const p1 = (totalHrs * 0.40).toFixed(1);
-      const p2 = (totalHrs * 0.35).toFixed(1);
-      const p3 = (totalHrs * 0.25).toFixed(1);
-
-      document.getElementById('stg1-txt').innerText = `${p1} Hours (40%)`;
-      document.getElementById('stg2-txt').innerText = `${p2} Hours (35%)`;
-      document.getElementById('stg3-txt').innerText = `${p3} Hours (25%)`;
+      document.getElementById('stg1-txt').innerText = `${(totalHrs * 0.4).toFixed(1)} Hrs (40%)`;
+      document.getElementById('stg2-txt').innerText = `${(totalHrs * 0.35).toFixed(1)} Hrs (35%)`;
+      document.getElementById('stg3-txt').innerText = `${(totalHrs * 0.25).toFixed(1)} Hrs (25%)`;
 
       setTimeout(() => {
         document.getElementById('bar1').style.width = '40%';
         document.getElementById('bar2').style.width = '35%';
         document.getElementById('bar3').style.width = '25%';
-      }, 150);
+      }, 100);
 
       document.getElementById('mission-screen').scrollIntoView({ behavior: 'smooth' });
-    }
+    });
 
-    // Pomodoro Engine
+    // Timer Controls
     let timeLeft = 25 * 60;
     let timerRef = null;
 
-    function startSprint() {
-      playBeep(700, 'sine', 0.15);
+    document.getElementById('btn-start-timer').addEventListener('click', function() {
+      playBeep(750, 0.12);
       if (timerRef) return;
       timerRef = setInterval(() => {
         if (timeLeft <= 0) {
           clearInterval(timerRef);
           timerRef = null;
-          soundSuccess();
+          playBeep(900, 0.3);
           alert("🎉 Round Complete! Checkpoint Quiz unlocked!");
           renderQuiz();
         } else {
           timeLeft--;
-          refreshTimerClock();
+          const m = Math.floor(timeLeft / 60);
+          const s = timeLeft % 60;
+          document.getElementById('clock-display').innerText = 
+            `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
         }
       }, 1000);
-    }
+    });
 
-    function pauseSprint() {
-      playBeep(350, 'sine', 0.15);
+    document.getElementById('btn-pause-timer').addEventListener('click', function() {
+      playBeep(320, 0.12);
       clearInterval(timerRef);
       timerRef = null;
-    }
+    });
 
-    function refreshTimerClock() {
-      const m = Math.floor(timeLeft / 60);
-      const s = timeLeft % 60;
-      document.getElementById('clock-display').innerText = 
-        `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
-    }
-
-    // Dynamic Quiz Generator across Class 6 to 12
     function renderQuiz() {
-      const cls = document.getElementById('class-select').value;
-      const sub = document.getElementById('stream-select').value
+      const cls = classEl.value;
+      const sub = streamEl.value;
+      const qBox = document.getElementById('quiz-panel');
+      const qText = document.getElementById('quiz-q');
+      const qOpts = document.getElementById('quiz-opts');
+
+      qBox.style.display = 'block';
+      qOpts.innerHTML = '';
+
+      let question = {
+        q: "Revision Checkpoint: What is the golden rule for Personal Accounts?",
+        opts: ["Debit the receiver, Credit the giver", "Debit what comes in, Credit goes out", "Debit all expenses, Credit gains", "Only record bank balance"],
+        ans: 0
+      };
+    
