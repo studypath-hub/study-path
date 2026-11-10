@@ -228,35 +228,67 @@
     <p style="color: var(--dim); font-size: 12px;">Full syllabus tracking across Class 6–12, JEE, NEET & CA Foundation.</p>
 
     <label>Exam / Standard Category</label>
-    <select id="sel-cat" onchange="onCategoryChange()">
-      <option value="11-12-comm" selected>Class 11–12: Commerce (CBSE / State)</option>
-      <option value="6-8">Class 6–8 (Middle School NCERT)</option>
-      <option value="9-10">Class 9–10 (Secondary Board NCERT)</option>
-      <option value="11-12-sci">Class 11–12: Science (CBSE / State)</option>
-      <option value="11-12-arts">Class 11–12: Arts & Humanities</option>
-      <option value="comp-jee">Competitive: JEE Main & Advanced</option>
-      <option value="comp-neet">Competitive: NEET UG Medical</option>
-      <option value="comp-ca">Competitive: CA Foundation (ICAI)</option>
+    <select id="sel-cat">
+      <option value="Class 11-12 Commerce">Class 11–12: Commerce (CBSE / State)</option>
+      <option value="Class 11-12 Science">Class 11–12: Science (CBSE / State)</option>
+      <option value="Class 11-12 Arts">Class 11–12: Arts & Humanities</option>
+      <option value="Class 9-10 Secondary">Class 9–10 (Secondary Board NCERT)</option>
+      <option value="Class 6-8 Middle">Class 6–8 (Middle School NCERT)</option>
+      <option value="JEE Main & Adv">Competitive: JEE Main & Advanced</option>
+      <option value="NEET UG Medical">Competitive: NEET UG Medical</option>
+      <option value="CA Foundation">Competitive: CA Foundation (ICAI)</option>
     </select>
 
     <div class="grid-2">
       <div>
         <label>Subject</label>
-        <select id="sel-sub" onchange="onSubjectChange()">
-          <option value="Accountancy" selected>Accountancy</option>
-          <option value="Business Studies">Business Studies</option>
-          <option value="Economics">Economics</option>
-          <option value="English Core">English Core</option>
+        <select id="sel-sub">
+          <optgroup label="Class 11-12 Commerce">
+            <option value="Accountancy" selected>Accountancy</option>
+            <option value="Business Studies">Business Studies</option>
+            <option value="Economics">Economics</option>
+            <option value="English Core">English Core</option>
+          </optgroup>
+          <optgroup label="Class 11-12 Science">
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Biology">Biology</option>
+          </optgroup>
+          <optgroup label="Competitive Tracks">
+            <option value="JEE Physics/Maths">JEE Physics & Maths</option>
+            <option value="NEET Biology/Chem">NEET Biology & Chemistry</option>
+            <option value="CA Accounting/Laws">CA Accounting & Laws</option>
+          </optgroup>
+          <optgroup label="Class 6 to 10">
+            <option value="Secondary Math & Science">Class 9-10 Math & Science</option>
+            <option value="Middle School Foundation">Class 6-8 Foundation</option>
+          </optgroup>
         </select>
       </div>
       <div>
         <label>NCERT / Exam Topic</label>
         <select id="sel-chap">
-          <option value="Rules of Debit/Credit & Journal" selected>Rules of Debit/Credit & Journal</option>
-          <option value="Ledger & Trial Balance">Ledger & Trial Balance</option>
-          <option value="Bank Reconciliation Statement (BRS)">Bank Reconciliation Statement (BRS)</option>
-          <option value="Depreciation & Provisions">Depreciation & Provisions</option>
-          <option value="Financial Statements of Sole Proprietorship">Financial Statements of Sole Proprietorship</option>
+          <optgroup label="Accountancy & Commerce">
+            <option value="Rules of Debit/Credit & Journal" selected>Rules of Debit/Credit & Journal</option>
+            <option value="Ledger & Trial Balance">Ledger & Trial Balance</option>
+            <option value="Bank Reconciliation Statement (BRS)">Bank Reconciliation Statement (BRS)</option>
+            <option value="Depreciation & Provisions">Depreciation & Provisions</option>
+            <option value="Financial Statements of Sole Proprietorship">Financial Statements</option>
+            <option value="Nature & Purpose of Business">Nature & Purpose of Business</option>
+            <option value="Consumer Equilibrium & Demand">Consumer Equilibrium & Demand</option>
+          </optgroup>
+          <optgroup label="Science & Competitive">
+            <option value="Laws of Motion & Mechanics">Laws of Motion & Mechanics</option>
+            <option value="Chemical Bonding & Thermodynamics">Chemical Bonding & Thermodynamics</option>
+            <option value="Cell Biology & Human Physiology">Cell Biology & Human Physiology</option>
+            <option value="Calculus & Coordinate Geometry">Calculus & Coordinate Geometry</option>
+          </optgroup>
+          <optgroup label="Class 6 to 10 Boards">
+            <option value="Real Numbers, Polynomials & Linear Eq">Real Numbers & Equations</option>
+            <option value="Life Processes & Chemical Reactions">Life Processes & Reactions</option>
+            <option value="Integers, Fractions & Algebra Basics">Integers & Algebra Basics</option>
+          </optgroup>
         </select>
       </div>
     </div>
@@ -287,22 +319,22 @@
     <h2>📊 Active Study Mission</h2>
 
     <div class="mentor-card">
-      <img id="mascot-img" class="mentor-img" src="" alt="Mascot">
-      <div id="mascot-quote" class="mentor-txt"></div>
+      <img id="mascot-img" class="mentor-img" src="https://upload.wikimedia.org/wikipedia/en/c/cb/Monkey_D_Luffy.png" alt="Mascot">
+      <div id="mascot-quote" class="mentor-txt">Ore wa Luffy! Target lock kar liya hai, ab poora syllabus conquer karenge! 🍖🔥</div>
     </div>
 
     <div style="background:#090e1a; padding:14px; border-radius:14px; margin-bottom:14px;">
       <div class="bar-item">
-        <div class="bar-meta"><span>1. NCERT Theory & Core Foundation</span><span id="t-stg1">40%</span></div>
-        <div class="bar-track"><div class="bar-prog" id="prog1"></div></div>
+        <div class="bar-meta"><span>1. NCERT Theory & Core Foundation</span><span id="t-stg1">4.0 hrs (40%)</span></div>
+        <div class="bar-track"><div class="bar-prog" id="prog1" style="width:40%;"></div></div>
       </div>
       <div class="bar-item">
-        <div class="bar-meta"><span>2. In-Text Examples, PYQs & Exercises</span><span id="t-stg2">35%</span></div>
-        <div class="bar-track"><div class="bar-prog" id="prog2"></div></div>
+        <div class="bar-meta"><span>2. In-Text Examples, PYQs & Exercises</span><span id="t-stg2">3.5 hrs (35%)</span></div>
+        <div class="bar-track"><div class="bar-prog" id="prog2" style="width:35%;"></div></div>
       </div>
       <div class="bar-item">
-        <div class="bar-meta"><span>3. 25-Min Sprints & Formula/Keyword Revision</span><span id="t-stg3">25%</span></div>
-        <div class="bar-track"><div class="bar-prog" id="prog3"></div></div>
+        <div class="bar-meta"><span>3. 25-Min Sprints & Formula/Keyword Revision</span><span id="t-stg3">2.5 hrs (25%)</span></div>
+        <div class="bar-track"><div class="bar-prog" id="prog3" style="width:25%;"></div></div>
       </div>
     </div>
 
@@ -329,8 +361,12 @@
     <div class="quiz-modal">
       <h3 style="color:var(--gold);">⚡ 25-Min Sprint Checkpoint Quiz</h3>
       <p style="font-size:12px; color:var(--dim); margin-bottom:10px;">Sprint complete! Is checkpoint ka jawab dekar Sprint Badge unlock karo:</p>
-      <div id="sq-question" style="font-weight:700; margin-bottom:10px;"></div>
-      <div id="sq-choices"></div>
+      <div id="sq-question" style="font-weight:700; margin-bottom:10px;">What is the single most important rule to excel in this chapter?</div>
+      <div id="sq-choices">
+        <button type="button" class="q-opt-btn" onclick="answerSprint(true)">Consistent conceptual practice and solving exercise questions</button>
+        <button type="button" class="q-opt-btn" onclick="answerSprint(false)">Ratta marna without understanding concepts</button>
+        <button type="button" class="q-opt-btn" onclick="answerSprint(false)">Skipping notes and reading direct on exam night</button>
+      </div>
     </div>
   </div>
 
@@ -338,7 +374,8 @@
     <div class="quiz-modal" style="border-color:var(--gold);">
       <h3 style="color:var(--gold);">🏆 2-Hour Grand Mastery Exam</h3>
       <p style="font-size:12px; color:var(--dim); margin-bottom:12px;">Hard focus complete ho gaya! Final syllabus audit report ke liye test submit karo:</p>
-      <div id="gq-container"></div>
+      <div style="margin-bottom:10px; font-weight:700;">Q1. Primary success factor in competitive/board exams?</div>
+      <button type="button" class="q-opt-btn" style="background:#0284c7; margin-bottom:8px;">Consistent revision & numerical problem solving</button>
       <button type="button" class="btn-main" style="background:var(--green); margin-top:14px;" onclick="submitGrandQuiz()">Submit & View Full Audit Chart</button>
     </div>
   </div>
@@ -350,15 +387,15 @@
     <div class="kpi-grid">
       <div class="kpi-card">
         <div style="font-size:11px; color:var(--dim);">Total Focus Time</div>
-        <div class="kpi-val" id="rep-time">0 min</div>
+        <div class="kpi-val" id="rep-time">25 min</div>
       </div>
       <div class="kpi-card">
         <div style="font-size:11px; color:var(--dim);">Focus Efficiency</div>
-        <div class="kpi-val" id="rep-eff" style="color:var(--green);">100%</div>
+        <div class="kpi-val" id="rep-eff" style="color:var(--green);">94%</div>
       </div>
       <div class="kpi-card">
         <div style="font-size:11px; color:var(--dim);">Breaks / Pauses</div>
-        <div class="kpi-val" id="rep-pause" style="color:var(--gold);">0</div>
+        <div class="kpi-val" id="rep-pause" style="color:var(--gold);">1</div>
       </div>
       <div class="kpi-card">
         <div style="font-size:11px; color:var(--dim);">Screen Exits / Distractions</div>
@@ -368,84 +405,24 @@
 
     <div style="background:#090e1a; padding:14px; border-radius:14px; border-left:4px solid var(--accent); margin:12px 0;">
       <h4 style="color:var(--accent);">📈 Syllabus Completion Forecast</h4>
-      <p id="rep-forecast" style="font-size:13px; margin-top:4px; line-height:1.5;"></p>
+      <p id="rep-forecast" style="font-size:13px; margin-top:4px; line-height:1.5;">
+        Target track has approximately <strong>24 Chapters</strong>.<br>
+        Tere current <strong>2 Hrs/Day</strong> pace aur <strong>94% Focus Score</strong> ke hisaab se:<br>
+        ⚡ Poora syllabus <strong>36 dino</strong> mein complete ho jayega!
+      </p>
     </div>
 
     <div style="margin-top:10px;">
       <h4 style="font-size:14px; color:var(--gold);">🎖️ Earned Session Badges:</h4>
       <div class="badge-shelf" id="rep-badges">
         <div class="badge-chip">🌟 Mission Initiator</div>
+        <div class="badge-chip">🏅 25-Min Sprint Conqueror</div>
+        <div class="badge-chip">🎖️ 2-Hour Grand Exam Master</div>
       </div>
     </div>
   </div>
 
   <script>
-    var audioCtx = null;
-    function beep(freq, dur) {
-      try {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        var osc = audioCtx.createOscillator();
-        var gain = audioCtx.createGain();
-        osc.frequency.value = freq || 500;
-        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (dur || 0.12));
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + (dur || 0.12));
-      } catch(e){}
-    }
-
-    var curriculum = {
-      "11-12-comm": {
-        "Accountancy": ["Rules of Debit/Credit & Journal", "Ledger & Trial Balance", "Bank Reconciliation Statement (BRS)", "Depreciation & Provisions", "Financial Statements of Sole Proprietorship"],
-        "Business Studies": ["Nature & Purpose of Business", "Forms of Business Organisation", "Sources of Business Finance", "Small Business & Internal Trade"],
-        "Economics": ["Consumer's Equilibrium & Demand", "Elasticity of Demand", "Production Function & Cost", "Measures of Central Tendency", "National Income Accounting"],
-        "English Core": ["The Portrait of a Lady", "We're Not Afraid to Die", "Note Making & Summary", "Notice & Formal Letters"]
-      },
-      "6-8": {
-        "Mathematics": ["Integers & Fractions", "Algebra & Linear Equations", "Perimeter & Area", "Rational Numbers", "Data Handling"],
-        "Science": ["Crop Production & Management", "Microorganisms: Friend & Foe", "Acids, Bases & Salts", "Light & Reflection", "Cell Structure"],
-        "Social Science": ["Our Pasts (History)", "The Earth Our Habitat", "Civics: Social & Political Life"],
-        "English": ["Honeysuckle Grammar", "Reading Comprehension", "Letter & Diary Writing"]
-      },
-      "9-10": {
-        "Mathematics": ["Real Numbers & Polynomials", "Pair of Linear Equations", "Quadratic Equations", "Trigonometry & Heights", "Statistics & Probability"],
-        "Science": ["Chemical Reactions", "Acids, Bases & Salts", "Metals & Non-Metals", "Life Processes", "Light - Reflection & Refraction", "Electricity & Magnetism"],
-        "Social Science": ["Nationalism in India", "Resources & Development", "Democratic Politics", "Economics: Development"],
-        "English": ["First Flight Prose", "Analytical Paragraph", "Grammar & Reported Speech"]
-      },
-      "11-12-sci": {
-        "Physics": ["Units & Measurements", "Motion in a Straight Line", "Laws of Motion", "Work, Energy & Power", "Thermodynamics & Waves"],
-        "Chemistry": ["Basic Concepts of Chemistry", "Structure of Atom", "Chemical Bonding", "Chemical Thermodynamics", "Organic Chemistry Basics"],
-        "Mathematics": ["Sets & Functions", "Trigonometric Functions", "Calculus & Limits", "Permutations & Combinations"],
-        "Biology": ["Living World & Biological Classification", "Plant Kingdom", "Animal Kingdom", "Cell: Unit of Life", "Photosynthesis in Higher Plants"]
-      },
-      "11-12-arts": {
-        "History": ["Writing and City Life", "An Empire Across Three Continents", "Themes in Indian History"],
-        "Political Science": ["Constitution: Why and How?", "Rights in Indian Constitution", "Political Theory"],
-        "Geography": ["Fundamentals of Physical Geography", "India: Physical Environment"]
-      },
-      "comp-jee": {
-        "JEE Physics": ["Kinematics & Dynamics", "Rotational Motion", "Electrodynamics", "Optics & Modern Physics"],
-        "JEE Chemistry": ["Atomic Structure & Bonding", "Chemical Kinetics & Equilibrium", "Coordination Compounds", "Organic Reaction Mechanisms"],
-        "JEE Mathematics": ["Coordinate Geometry", "Differential & Integral Calculus", "Vectors & 3D Geometry", "Matrices & Determinants"]
-      },
-      "comp-neet": {
-        "NEET Zoology": ["Human Physiology", "Animal Reproduction & Genetics", "Biotechnology & Applications"],
-        "NEET Botany": ["Plant Physiology & Nutrition", "Morphology of Flowering Plants", "Ecology & Environment"],
-        "NEET Chemistry": ["Equilibrium & Thermodynamics", "Hydrocarbons & Organic Compounds", "Periodic Trends & p-Block"],
-        "NEET Physics": ["Mechanics & Laws of Motion", "Work Power Energy", "Ray Optics & Semiconductors"]
-      },
-      "comp-ca": {
-        "CA Principles of Accounting": ["Accounting Framework & Policies", "Bank Reconciliation Statement (BRS)", "Depreciation & Special Transactions", "Preparation of Final Accounts"],
-        "CA Business Laws": ["Indian Contract Act 1872", "Sale of Goods Act 1930", "Indian Partnership Act 1932", "Limited Liability Partnership (LLP)"],
-        "CA Quantitative Aptitude": ["Ratio, Proportion & Indices", "Mathematics of Finance", "Permutations & Combinations", "Measures of Dispersion"],
-        "CA Business Economics": ["Theory of Demand & Supply", "Theory of Production and Cost", "Price Determination in Markets", "Indian Economy Overview"]
-      }
-    };
-
     var buddies = {
       luffy: {
         img: "https://upload.wikimedia.org/wikipedia/en/c/cb/Monkey_D_Luffy.png",
@@ -461,4 +438,49 @@
       },
       pikachu: {
         img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-        quote: "Pika-Pikachu! High-focus streak on rakho, inter
+        quote: "Pika-Pikachu! High-focus streak on rakho, intervals crack karke XP earn karenge! ⚡🌟"
+      }
+    };
+
+    var activeBuddy = 'luffy';
+
+    function pickBuddy(key) {
+      activeBuddy = key;
+      document.querySelectorAll('.m-btn').forEach(function(b) { b.classList.remove('active'); });
+      var el = document.getElementById('btn-' + key);
+      if (el) el.classList.add('active');
+    }
+
+    function startMission() {
+      var d = parseInt(document.getElementById('inp-days').value) || 5;
+      var h = parseInt(document.getElementById('inp-hrs').value) || 2;
+      var total = d * h;
+      var sub = document.getElementById('sel-sub').value;
+      var chap = document.getElementById('sel-chap').value;
+
+      document.getElementById('mission-view').style.display = 'block';
+      document.getElementById('mascot-img').src = buddies[activeBuddy].img;
+      document.getElementById('mascot-quote').innerText = buddies[activeBuddy].quote + '\n\n🎯 Target: ' + sub + ' — ' + chap;
+
+      document.getElementById('t-stg1').innerText = (total * 0.4).toFixed(1) + ' hrs (40%)';
+      document.getElementById('t-stg2').innerText = (total * 0.35).toFixed(1) + ' hrs (35%)';
+      document.getElementById('t-stg3').innerText = (total * 0.25).toFixed(1) + ' hrs (25%)';
+
+      document.getElementById('mission-view').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    var timerId = null;
+    var sprintSeconds = 25 * 60;
+    var totalSecondsStudied = 0;
+    var pauseCount = 0;
+    var screenExitCount = 0;
+
+    document.addEventListener("visibilitychange", function() {
+      if (document.hidden && timerId) {
+        screenExitCount++;
+        document.getElementById('stat-away').innerText = screenExitCount;
+      }
+    });
+
+    function runTimer() {
+ 
