@@ -3,367 +3,474 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StudyPath Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  <title>StudyPath Hub — Pan-India NCERT & Competitive Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Nunito', sans-serif;
-      background: #0b1120;
-      color: #f8fafc;
-      padding: 16px;
-      padding-bottom: 60px;
+    :root {
+      --bg: #090e1a;
+      --card: #131c31;
+      --accent: #38bdf8;
+      --gold: #facc15;
+      --green: #22c55e;
+      --red: #ef4444;
+      --purple: #a855f7;
+      --text: #f8fafc;
+      --dim: #94a3b8;
     }
-    .header {
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 14px;
+      padding-bottom: 80px;
+    }
+
+    header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 15px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      margin-bottom: 15px;
-    }
-    .brand { font-family: 'Fredoka', cursive; font-size: 22px; color: #38bdf8; }
-    .xp-badge { background: #facc15; color: #000; font-weight: 800; padding: 4px 12px; border-radius: 20px; font-size: 13px; }
-    .card {
-      background: #151f38;
+      padding: 12px 16px;
+      background: var(--card);
       border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       border: 1px solid rgba(255,255,255,0.08);
     }
-    h2, h3 { font-family: 'Fredoka', cursive; margin-bottom: 8px; }
-    label { font-size: 12px; font-weight: 700; color: #94a3b8; display: block; margin-top: 10px; text-transform: uppercase; }
+    .brand { font-family: 'Fredoka', cursive; font-size: 22px; color: var(--accent); }
+    .xp-pill { background: var(--gold); color: #000; font-weight: 800; font-size: 13px; padding: 4px 14px; border-radius: 99px; }
+
+    .card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    h2, h3, h4 { font-family: 'Fredoka', cursive; }
+    h2 { font-size: 19px; margin-bottom: 6px; }
+
+    label { font-size: 11px; font-weight: 800; color: var(--dim); display: block; margin-top: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
     select, input {
       width: 100%;
-      padding: 10px;
-      margin-top: 4px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: #0b1120;
+      padding: 11px 12px;
+      margin-top: 5px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: #090e1a;
       color: #fff;
       font-size: 14px;
+      outline: none;
     }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
     .mascot-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 6px;
-      margin-top: 10px;
+      margin-top: 8px;
     }
     .m-btn {
-      background: #0b1120;
+      background: #090e1a;
       border: 2px solid transparent;
-      padding: 8px 4px;
-      border-radius: 10px;
+      padding: 8px 2px;
+      border-radius: 12px;
       color: #fff;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
     }
-    .m-btn.active {
-      border-color: #38bdf8;
-      background: rgba(56, 189, 248, 0.2);
-    }
-    .btn-action {
+    .m-btn.active { border-color: var(--accent); background: rgba(56, 189, 248, 0.18); }
+
+    .btn-main {
       width: 100%;
-      background: #0284c7;
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
       color: #fff;
       border: none;
       padding: 14px;
-      border-radius: 12px;
+      border-radius: 14px;
       font-family: 'Fredoka', cursive;
       font-size: 17px;
       cursor: pointer;
-      margin-top: 15px;
+      margin-top: 16px;
     }
-    #screen-result { display: none; }
-    .dialogue {
+
+    #mission-view { display: none; }
+
+    .mentor-card {
       display: flex;
       align-items: center;
       gap: 12px;
-      background: #0b1120;
+      background: #090e1a;
+      border-radius: 14px;
+      padding: 12px;
+      border-left: 4px solid var(--gold);
+      margin-bottom: 16px;
+    }
+    .mentor-img { width: 55px; height: 55px; object-fit: contain; }
+    .mentor-txt { font-size: 13px; font-weight: 700; color: var(--gold); line-height: 1.4; }
+
+    .bar-item { margin-bottom: 12px; }
+    .bar-meta { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+    .bar-track { background: rgba(255,255,255,0.08); height: 10px; border-radius: 6px; overflow: hidden; }
+    .bar-prog { height: 100%; background: linear-gradient(90deg, #38bdf8, #818cf8); width: 0%; transition: width 0.7s; }
+
+    /* Focus Tracker Live Widget */
+    .focus-console {
+      background: #090e1a;
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      margin-top: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .big-clock {
+      font-family: 'Fredoka', cursive;
+      font-size: 48px;
+      color: #fb923c;
+      letter-spacing: 2px;
+      margin: 4px 0;
+    }
+    .timer-btn-row { display: flex; justify-content: center; gap: 10px; margin-top: 8px; }
+    .t-btn { padding: 8px 20px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; color: #fff; font-size: 13px; }
+
+    .live-tags {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255,255,255,0.1);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Modal / Popups */
+    .quiz-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 999;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .quiz-modal {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 20px;
+      max-width: 500px;
+      margin: 40px auto;
+      border: 1.5px solid var(--accent);
+    }
+    .q-opt-btn {
+      display: block;
+      width: 100%;
+      background: #090e1a;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 10px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Final Comprehensive Summary Report */
+    #final-report {
+      display: none;
+      background: linear-gradient(180deg, #131c31 0%, #0d1527 100%);
+      border: 2px solid var(--gold);
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .kpi-card {
+      background: #090e1a;
       padding: 12px;
       border-radius: 12px;
-      border-left: 4px solid #facc15;
-      margin-bottom: 15px;
-    }
-    .dialogue img { width: 55px; height: 55px; object-fit: contain; }
-    .dialogue p { font-size: 13px; font-weight: 700; color: #facc15; }
-    .bar-wrap { margin-bottom: 10px; }
-    .bar-info { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; margin-bottom: 4px; }
-    .bar-bg { background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; overflow: hidden; }
-    .bar-fill { height: 100%; width: 0%; background: #38bdf8; transition: width 0.8s; }
-    .timer-box {
       text-align: center;
-      background: #0b1120;
-      padding: 16px;
-      border-radius: 12px;
-      margin-top: 15px;
+      border: 1px solid rgba(255,255,255,0.06);
     }
-    .clock { font-family: 'Fredoka', cursive; font-size: 45px; color: #fb923c; margin: 6px 0; }
-    .t-btn { padding: 8px 18px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; color: #fff; }
-    #quiz-wrap { display: none; background: #0b1120; padding: 14px; border-radius: 12px; margin-top: 15px; border: 1px solid #38bdf8; }
-    .q-opt {
-      width: 100%;
-      background: #151f38;
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #fff;
-      padding: 10px;
-      margin-top: 8px;
+    .kpi-val { font-size: 20px; font-weight: 800; color: var(--accent); margin-top: 2px; }
+    .badge-shelf {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .badge-chip {
+      background: rgba(250, 204, 21, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 6px 12px;
       border-radius: 8px;
-      text-align: left;
-      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <div class="header">
+  <header>
     <div class="brand">⚡ StudyPath Hub</div>
-    <div class="xp-badge">⭐ XP: <span id="xp">100</span></div>
-  </div>
+    <div class="xp-pill">⭐ XP: <span id="user-xp">100</span></div>
+  </header>
 
+  <!-- SETUP CONTROLLER -->
   <div class="card" id="form-card">
-    <h2>🎯 Plan Your Mission</h2>
+    <h2>🎯 All-India NCERT & Competitive Mission</h2>
+    <p style="color: var(--dim); font-size: 12px;">Full syllabus tracking across Class 6–12, JEE, NEET & CA Foundation.</p>
 
-    <label>Standard / Class</label>
-    <select id="sel-class" onchange="applyClass()">
-      <option value="6-8">Classes 6 to 8 (Middle)</option>
-      <option value="9-10">Classes 9 & 10 (High School)</option>
-      <option value="11-12-comm">Class 11 & 12: Commerce</option>
-      <option value="11-12-sci">Class 11 & 12: Science</option>
-      <option value="11-12-arts">Class 11 & 12: Arts & Humanities</option>
+    <label>Exam / Standard Category</label>
+    <select id="sel-cat" onchange="loadSubs()">
+      <option value="6-8">Class 6–8 (Middle School NCERT)</option>
+      <option value="9-10">Class 9–10 (Secondary Board NCERT)</option>
+      <option value="11-12-comm" selected>Class 11–12: Commerce (CBSE / State)</option>
+      <option value="11-12-sci">Class 11–12: Science (CBSE / State)</option>
+      <option value="11-12-arts">Class 11–12: Arts & Humanities</option>
+      <option value="comp-jee">Competitive: JEE Main & Advanced</option>
+      <option value="comp-neet">Competitive: NEET UG Medical</option>
+      <option value="comp-ca">Competitive: CA Foundation (ICAI)</option>
     </select>
 
-    <label>Subject</label>
-    <select id="sel-sub" onchange="applySubject()"></select>
-
-    <label>Target Topic / Chapter</label>
-    <select id="sel-ch"></select>
-
-    <div style="display: flex; gap: 10px;">
-      <div style="flex:1;">
-        <label>Days</label>
-        <input type="number" id="inp-days" value="4" min="1" max="30">
+    <div class="grid-2">
+      <div>
+        <label>Subject</label>
+        <select id="sel-sub" onchange="loadChapters()"></select>
       </div>
-      <div style="flex:1;">
-        <label>Daily Hours</label>
-        <input type="number" id="inp-hrs" value="2" min="1" max="10">
+      <div>
+        <label>NCERT / Exam Topic</label>
+        <select id="sel-chap"></select>
       </div>
     </div>
 
-    <label>Choose Mascot</label>
+    <div class="grid-2">
+      <div>
+        <label>Days Target</label>
+        <input type="number" id="inp-days" value="5" min="1" max="60">
+      </div>
+      <div>
+        <label>Daily Study Time (Hours)</label>
+        <input type="number" id="inp-hrs" value="2" min="1" max="12">
+      </div>
+    </div>
+
+    <label>Choose Mascot Partner</label>
     <div class="mascot-row">
-      <button type="button" class="m-btn active" onclick="setMascot('luffy', this)">👒 Luffy</button>
-      <button type="button" class="m-btn" onclick="setMascot('doraemon', this)">🔔 Doraemon</button>
-      <button type="button" class="m-btn" onclick="setMascot('shinchan', this)">🍫 Shin-chan</button>
-      <button type="button" class="m-btn" onclick="setMascot('pikachu', this)">⚡ Pikachu</button>
+      <button type="button" class="m-btn active" onclick="pickBuddy('luffy', this)">👒 Luffy</button>
+      <button type="button" class="m-btn" onclick="pickBuddy('doraemon', this)">🔔 Doraemon</button>
+      <button type="button" class="m-btn" onclick="pickBuddy('shinchan', this)">🍫 Shin-chan</button>
+      <button type="button" class="m-btn" onclick="pickBuddy('pikachu', this)">⚡ Pikachu</button>
     </div>
 
-    <button type="button" class="btn-action" onclick="makeChart()">🚀 Generate Action Chart</button>
+    <button type="button" class="btn-main" onclick="startMission()">🚀 Launch Action Mission</button>
   </div>
 
-  <div class="card" id="screen-result">
-    <h2>📊 Mission Action Chart</h2>
+  <!-- LIVE MISSION & POMODORO DASHBOARD -->
+  <div class="card" id="mission-view">
+    <h2>📊 Active Study Mission</h2>
 
-    <div class="dialogue">
-      <img id="m-pic" src="" alt="Mascot">
-      <p id="m-quote"></p>
-    </div>
-
-    <div class="bar-wrap">
-      <div class="bar-info"><span>Concept Clarity & NCERT</span><span id="t1">40%</span></div>
-      <div class="bar-bg"><div class="bar-fill" id="b1"></div></div>
-    </div>
-    <div class="bar-wrap">
-      <div class="bar-info"><span>Question Practice & Numerical/Notes</span><span id="t2">35%</span></div>
-      <div class="bar-bg"><div class="bar-fill" id="b2"></div></div>
-    </div>
-    <div class="bar-wrap">
-      <div class="bar-info"><span>Speed Revision & Quiz Check</span><span id="t3">25%</span></div>
-      <div class="bar-bg"><div class="bar-fill" id="b3"></div></div>
+    <div class="mentor-card">
+      <img id="mascot-img" class="mentor-img" src="" alt="Mascot">
+      <div id="mascot-quote" class="mentor-txt"></div>
     </div>
 
-    <div class="timer-box">
-      <h3>⏱️ Focus Sprint Timer</h3>
-      <div class="clock" id="timer-txt">25:00</div>
-      <button type="button" class="t-btn" style="background:#22c55e;" onclick="startClock()">Start</button>
-      <button type="button" class="t-btn" style="background:#ef4444;" onclick="pauseClock()">Pause</button>
+    <!-- Pacing Bar Breakdown -->
+    <div style="background:#090e1a; padding:14px; border-radius:14px; margin-bottom:14px;">
+      <div class="bar-item">
+        <div class="bar-meta"><span>1. NCERT Theory & Core Foundation</span><span id="t-stg1">40%</span></div>
+        <div class="bar-track"><div class="bar-prog" id="prog1"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-meta"><span>2. In-Text Examples, PYQs & Exercises</span><span id="t-stg2">35%</span></div>
+        <div class="bar-track"><div class="bar-prog" id="prog2"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-meta"><span>3. 25-Min Sprints & Formula/Keyword Revision</span><span id="t-stg3">25%</span></div>
+        <div class="bar-track"><div class="bar-prog" id="prog3"></div></div>
+      </div>
     </div>
 
-    <div id="quiz-wrap">
-      <h3>🧠 Quick Checkpoint Quiz</h3>
-      <p id="q-txt" style="margin: 8px 0; font-weight: 700;"></p>
-      <div id="q-choices"></div>
+    <!-- Pomodoro Tracker Engine -->
+    <div class="focus-console">
+      <h3>⏱️ 25-Minute Focus Sprint</h3>
+      <p style="font-size:11px; color:var(--dim);">Interval khatam hote hi 25-min MCQ pop-up aayega!</p>
+      <div class="big-clock" id="display-time">25:00</div>
+      
+      <div class="timer-btn-row">
+        <button type="button" class="t-btn" style="background:var(--green);" onclick="runTimer()">Start Sprint</button>
+        <button type="button" class="t-btn" style="background:var(--red);" onclick="haltTimer()">Pause</button>
+        <button type="button" class="t-btn" style="background:var(--purple);" onclick="trigger2HourGrandQuiz()">Finish & Grand Quiz 🏆</button>
+      </div>
+
+      <div class="live-tags">
+        <div>⏸️ Pauses Taken: <span id="stat-pause" style="color:var(--gold);">0</span></div>
+        <div>👀 Screen Exits: <span id="stat-away" style="color:var(--red);">0</span></div>
+        <div>⏳ Total Studied: <span id="stat-min" style="color:var(--accent);">0 min</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPUP 1: 25-MINUTE SPRINT QUIZ -->
+  <div class="quiz-overlay" id="pop-sprint-quiz">
+    <div class="quiz-modal">
+      <h3 style="color:var(--gold);">⚡ 25-Min Sprint Checkpoint Quiz</h3>
+      <p style="font-size:12px; color:var(--dim); margin-bottom:10px;">Sprint complete! Is question ka jawab dekar apna sprint badge unlock karo:</p>
+      <div id="sq-question" style="font-weight:700; margin-bottom:10px;"></div>
+      <div id="sq-choices"></div>
+    </div>
+  </div>
+
+  <!-- POPUP 2: 2-HOUR GRAND MASTERY QUIZ -->
+  <div class="quiz-overlay" id="pop-grand-quiz">
+    <div class="quiz-modal" style="border-color:var(--gold);">
+      <h3 style="color:var(--gold);">🏆 2-Hour Grand Mastery Exam</h3>
+      <p style="font-size:12px; color:var(--dim); margin-bottom:12px;">Tune 2 ghante ka hard study sprint cover kiya hai. Final analytics report ke liye is exam ko solve karo:</p>
+      <div id="gq-container"></div>
+      <button type="button" class="btn-main" style="background:var(--green); margin-top:14px;" onclick="submitGrandQuiz()">Submit & View Full Audit Chart</button>
+    </div>
+  </div>
+
+  <!-- FINAL SESSION AUDIT & SYLLABUS FORECASTER -->
+  <div class="card" id="final-report">
+    <h2 style="color:var(--gold);">🏁 Final Session Audit & Mastery Forecast</h2>
+    <p style="font-size:12px; color:var(--dim);">Detailed breakdown of your session intensity, distractions, and completion timeline.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div style="font-size:11px; color:var(--dim);">Total Focus Time</div>
+        <div class="kpi-val" id="rep-time">0 min</div>
+      </div>
+      <div class="kpi-card">
+        <div style="font-size:11px; color:var(--dim);">Focus Efficiency</div>
+        <div class="kpi-val" id="rep-eff" style="color:var(--green);">100%</div>
+      </div>
+      <div class="kpi-card">
+        <div style="font-size:11px; color:var(--dim);">Breaks / Pauses</div>
+        <div class="kpi-val" id="rep-pause" style="color:var(--gold);">0</div>
+      </div>
+      <div class="kpi-card">
+        <div style="font-size:11px; color:var(--dim);">Screen Exits / Distractions</div>
+        <div class="kpi-val" id="rep-distract" style="color:var(--red);">0</div>
+      </div>
+    </div>
+
+    <!-- Syllabus Completion Prediction Box -->
+    <div style="background:#090e1a; padding:14px; border-radius:14px; border-left:4px solid var(--accent); margin:12px 0;">
+      <h4 style="color:var(--accent);">📈 Syllabus Completion Forecast</h4>
+      <p id="rep-forecast" style="font-size:13px; margin-top:4px; line-height:1.5;"></p>
+    </div>
+
+    <!-- Badges Won -->
+    <div style="margin-top:10px;">
+      <h4 style="font-size:14px; color:var(--gold);">🎖️ Earned Session Badges:</h4>
+      <div class="badge-shelf" id="rep-badges">
+        <div class="badge-chip">🌟 Mission Initiator</div>
+      </div>
     </div>
   </div>
 
   <script>
-    var db = {
+    // Audio Synth Engine
+    var audioCtx = null;
+    function beep(freq, dur) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        var osc = audioCtx.createOscillator();
+        var gain = audioCtx.createGain();
+        osc.frequency.value = freq || 500;
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (dur || 0.12));
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + (dur || 0.12));
+      } catch(e){}
+    }
+
+    // NCERT & COMPETITIVE FULL CURRICULUM DATABASE
+    var curriculum = {
       "6-8": {
-        "Mathematics": ["Integers & Fractions", "Algebra Basics", "Simple Equations", "Perimeter and Area"],
-        "Science": ["Food & Nutrition", "Motion & Measurement", "Acids, Bases & Salts", "Light & Reflection"],
+        "Mathematics": ["Integers & Fractions", "Algebra & Linear Equations", "Perimeter & Area", "Rational Numbers", "Data Handling"],
+        "Science": ["Crop Production & Management", "Microorganisms: Friend & Foe", "Acids, Bases & Salts", "Light & Reflection", "Cell Structure"],
         "Social Science": ["Our Pasts (History)", "The Earth Our Habitat", "Civics: Social & Political Life"],
-        "English": ["Honeysuckle Grammar", "Reading Comprehension", "Letter Writing"]
+        "English": ["Honeysuckle Grammar", "Reading Comprehension", "Letter & Diary Writing"]
       },
       "9-10": {
-        "Mathematics": ["Real Numbers & Polynomials", "Linear Equations in Two Variables", "Quadratic Equations", "Trigonometry Basics", "Statistics & Probability"],
-        "Science": ["Chemical Reactions & Equations", "Acids, Bases & Salts", "Life Processes (Bio)", "Light - Reflection & Refraction", "Electricity"],
+        "Mathematics": ["Real Numbers & Polynomials", "Pair of Linear Equations", "Quadratic Equations", "Trigonometry & Heights", "Statistics & Probability"],
+        "Science": ["Chemical Reactions", "Acids, Bases & Salts", "Metals & Non-Metals", "Life Processes", "Light - Reflection & Refraction", "Electricity & Magnetism"],
         "Social Science": ["Nationalism in India", "Resources & Development", "Democratic Politics", "Economics: Development"],
         "English": ["First Flight Prose", "Analytical Paragraph", "Grammar & Reported Speech"]
       },
       "11-12-comm": {
-        "Accountancy": ["Rules of Debit & Credit", "Journal & Ledger", "Bank Reconciliation (BRS)", "Depreciation & Provisions", "Financial Statements"],
-        "Business Studies": ["Nature & Purpose of Business", "Forms of Business Org", "Sources of Business Finance", "Internal Trade"],
-        "Economics": ["Consumer Equilibrium & Demand", "Elasticity of Demand", "Production & Cost", "Measures of Central Tendency"],
-        "English Core": ["The Portrait of a Lady", "We're Not Afraid to Die", "Note Making & Summary", "Notice Writing"]
+        "Accountancy": ["Rules of Debit/Credit & Journal", "Ledger & Trial Balance", "Bank Reconciliation Statement (BRS)", "Depreciation & Provisions", "Financial Statements of Sole Proprietorship"],
+        "Business Studies": ["Nature & Purpose of Business", "Forms of Business Organisation", "Sources of Business Finance", "Small Business & Internal Trade"],
+        "Economics": ["Consumer's Equilibrium & Demand", "Elasticity of Demand", "Production Function & Cost", "Measures of Central Tendency", "National Income Accounting"],
+        "English Core": ["The Portrait of a Lady", "We're Not Afraid to Die", "Note Making & Summary", "Notice & Formal Letters"]
       },
       "11-12-sci": {
-        "Physics": ["Units & Measurement", "Motion in a Straight Line", "Laws of Motion", "Work, Energy & Power", "Gravitation"],
-        "Chemistry": ["Some Basic Concepts of Chemistry", "Structure of Atom", "Chemical Bonding", "Thermodynamics"],
-        "Mathematics": ["Sets & Relations", "Trigonometric Functions", "Complex Numbers", "Limits & Derivatives"],
-        "Biology": ["The Living World", "Biological Classification", "Cell: Unit of Life", "Photosynthesis in Higher Plants"]
+        "Physics": ["Units & Measurements", "Motion in a Straight Line", "Laws of Motion", "Work, Energy & Power", "Thermodynamics & Waves"],
+        "Chemistry": ["Basic Concepts of Chemistry", "Structure of Atom", "Chemical Bonding", "Chemical Thermodynamics", "Organic Chemistry Basics"],
+        "Mathematics": ["Sets & Functions", "Trigonometric Functions", "Calculus & Limits", "Permutations & Combinations"],
+        "Biology": ["Living World & Biological Classification", "Plant Kingdom", "Animal Kingdom", "Cell: Unit of Life", "Photosynthesis in Higher Plants"]
       },
       "11-12-arts": {
-        "History": ["Writing and City Life", "An Empire Across Three Continents", "Nomadic Empires"],
-        "Political Science": ["Constitution: Why and How?", "Rights in Indian Constitution", "Election and Representation"],
-        "Geography": ["Geography as a Discipline", "Origin & Evolution of the Earth", "Interior of the Earth"]
+        "History": ["Writing and City Life", "An Empire Across Three Continents", "Themes in Indian History"],
+        "Political Science": ["Constitution: Why and How?", "Rights in Indian Constitution", "Political Theory"],
+        "Geography": ["Fundamentals of Physical Geography", "India: Physical Environment"]
+      },
+      "comp-jee": {
+        "JEE Physics": ["Kinematics & Dynamics", "Rotational Motion", "Electrodynamics", "Optics & Modern Physics"],
+        "JEE Chemistry": ["Atomic Structure & Bonding", "Chemical Kinetics & Equilibrium", "Coordination Compounds", "Organic Reaction Mechanisms"],
+        "JEE Mathematics": ["Coordinate Geometry", "Differential & Integral Calculus", "Vectors & 3D Geometry", "Matrices & Determinants"]
+      },
+      "comp-neet": {
+        "NEET Zoology": ["Human Physiology (Digestion/Circulation/Nervous)", "Animal Reproduction & Genetics", "Biotechnology & Applications"],
+        "NEET Botany": ["Plant Physiology & Mineral Nutrition", "Morphology & Anatomy of Flowering Plants", "Ecology & Environment"],
+        "NEET Chemistry": ["Equilibrium & Thermodynamics", "Hydrocarbons & Organic Compounds", "Periodic Trends & p-Block"],
+        "NEET Physics": ["Mechanics & Laws of Motion", "Work Power Energy", "Ray Optics & Semiconductor Electronics"]
+      },
+      "comp-ca": {
+        "CA Principles of Accounting": ["Accounting Framework & Policies", "Bank Reconciliation Statement (BRS)", "Depreciation & Special Transactions", "Preparation of Final Accounts"],
+        "CA Business Laws": ["Indian Contract Act 1872", "Sale of Goods Act 1930", "Indian Partnership Act 1932", "Limited Liability Partnership (LLP)"],
+        "CA Quantitative Aptitude": ["Ratio, Proportion & Indices", "Mathematics of Finance (Simple & Compound)", "Permutations & Combinations", "Measures of Dispersion"],
+        "CA Business Economics": ["Theory of Demand & Supply", "Theory of Production and Cost", "Price Determination in Different Markets", "Indian Economy Overview"]
       }
     };
 
     var buddies = {
       luffy: {
         img: "https://upload.wikimedia.org/wikipedia/en/c/cb/Monkey_D_Luffy.png",
-        quote: "Ore wa Luffy! Target decide ho gaya, ab plan conquer karne se pehle rukna mana hai! 🍖🔥"
+        quote: "Ore wa Luffy! Target lock kar liya hai, jab tak syllabus conquer nahi hoga rukna mana hai! 🍖🔥"
       },
       doraemon: {
         img: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
-        quote: "Maine schedule bana diya hai! Nobita mat bano, focus sprint start karo! 🔔"
+        quote: "Maine schedule optimize kar diya hai! Nobita ki tarah distract mat hona, sprint timer on karo! 🔔"
       },
       shinchan: {
         img: "https://upload.wikimedia.org/wikipedia/en/7/70/Shin-chan.png",
-        quote: "Arre waah! Itna disciplined plan? Ek round timer complete karo, choco-chips milenge! 😂🍫"
+        quote: "Arre waah! Itna solid timetable? Ek 25-min ka sprint nikalo, choco-chips khayenge! 😂🍫"
       },
       pikachu: {
         img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-        quote: "Pika-Pikachu! Focus streak banaye rakho, quiz crack karke +50 XP earn karo! ⚡🌟"
+        quote: "Pika-Pikachu! High-focus streak on rakho, intervals crack karke XP earn karenge! ⚡🌟"
       }
     };
 
-    var currentMascot = 'luffy';
+    var activeBuddy = 'luffy';
 
-    function applyClass() {
-      var cls = document.getElementById('sel-class').value;
+    function loadSubs() {
+      beep(450, 0.08);
+      var cat = document.getElementById('sel-cat').value;
       var subSel = document.getElementById('sel-sub');
       subSel.innerHTML = '';
-      var subs = Object.keys(db[cls]);
-      subs.forEach(function(s) {
-        var opt = document.createElement('option');
-        opt.value = s;
-        opt.textContent = s;
-        subSel.appendChild(opt);
-      });
-      applySubject();
-    }
-
-    function applySubject() {
-      var cls = document.getElementById('sel-class').value;
-      var sub = document.getElementById('sel-sub').value;
-      var chSel = document.getElementById('sel-ch');
-      chSel.innerHTML = '';
-      if (db[cls] && db[cls][sub]) {
-        db[cls][sub].forEach(function(ch) {
-          var opt = document.createElement('option');
-          opt.value = ch;
-          opt.textContent = ch;
-          chSel.appendChild(opt);
-        });
-      }
-    }
-
-    function setMascot(key, btn) {
-      currentMascot = key;
-      document.querySelectorAll('.m-btn').forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-    }
-
-    function makeChart() {
-      var d = parseInt(document.getElementById('inp-days').value) || 1;
-      var h = parseInt(document.getElementById('inp-hrs').value) || 1;
-      var total = d * h;
-      var sub = document.getElementById('sel-sub').value;
-      var ch = document.getElementById('sel-ch').value;
-
-      document.getElementById('screen-result').style.display = 'block';
-      document.getElementById('m-pic').src = buddies[currentMascot].img;
-      document.getElementById('m-quote').textContent = buddies[currentMascot].quote + ' (Target: ' + sub + ' - ' + ch + ')';
-
-      document.getElementById('t1').textContent = (total * 0.4).toFixed(1) + ' hrs (40%)';
-      document.getElementById('t2').textContent = (total * 0.35).toFixed(1) + ' hrs (35%)';
-      document.getElementById('t3').textContent = (total * 0.25).toFixed(1) + ' hrs (25%)';
-
-      setTimeout(function() {
-        document.getElementById('b1').style.width = '40%';
-        document.getElementById('b2').style.width = '35%';
-        document.getElementById('b3').style.width = '25%';
-      }, 100);
-
-      document.getElementById('screen-result').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    var timeLeft = 25 * 60;
-    var timerId = null;
-
-    function startClock() {
-      if (timerId) return;
-      timerId = setInterval(function() {
-        if (timeLeft <= 0) {
-          clearInterval(timerId);
-          timerId = null;
-          alert("🎉 Time's up! Quick quiz unlocked!");
-          openQuiz();
-        } else {
-          timeLeft--;
-          var m = Math.floor(timeLeft / 60);
-          var s = timeLeft % 60;
-          document.getElementById('timer-txt').textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
-        }
-      }, 1000);
-    }
-
-    function pauseClock() {
-      clearInterval(timerId);
-      timerId = null;
-    }
-
-    function openQuiz() {
-      var box = document.getElementById('quiz-wrap');
-      box.style.display = 'block';
-      document.getElementById('q-txt').textContent = "Revision Check: Is consistent self-study the key to mastering this chapter?";
-      var cBox = document.getElementById('q-choices');
-      cBox.innerHTML = '';
-
-      var opt1 = document.createElement('button');
-      opt1.className = 'q-opt';
-      opt1.textContent = "Yes, regular practice and revision build full clarity!";
-      opt1.onclick = function() {
-        alert("🌟 Sahi jawab! +50 XP added!");
-        var xp = document.getElementById('xp');
-        xp.textContent = parseInt(xp.textContent) + 50;
-      };
-
-      var opt2 = document.createElement('button');
-      opt2.className = 'q-opt';
-      opt2.textContent = "No, one-night study is enough.";
-      opt2.onclick = function() {
-        alert("❌ Galat! Consistency se hi topper banenge!");
-      };
-
-      cBox.appendChild(opt1);
-      cBox.appendChild(opt2);
-      box.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    applyClass();
-  </script>
-</body>
-</html>
+      Object.keys
