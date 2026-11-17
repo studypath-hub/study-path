@@ -1,487 +1,539 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>StudyPath Hub — Pan-India NCERT & Competitive Portal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Princess Day, Jyotuu 👑</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090e1a;
-      --card: #131c31;
-      --accent: #38bdf8;
-      --gold: #facc15;
-      --green: #22c55e;
-      --red: #ef4444;
-      --purple: #a855f7;
-      --text: #f8fafc;
-      --dim: #94a3b8;
+      --rose-gold: #e09f9f;
+      --deep-rose: #9d3b53;
+      --gold: #d4af37;
+      --cream: #fff9f5;
     }
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
+      scroll-behavior: smooth;
     }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      padding: 14px;
-      padding-bottom: 80px;
+      background: radial-gradient(circle at 20% 10%, #fff0f5 0%, #ffe4ec 35%, #fdf2f8 70%, #fff8f3 100%);
+      color: #4a2531;
+      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 16px;
-      background: var(--card);
-      border-radius: 16px;
-      margin-bottom: 16px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .brand { font-family: 'Fredoka', cursive; font-size: 22px; color: var(--accent); }
-    .xp-pill { background: var(--gold); color: #000; font-weight: 800; font-size: 13px; padding: 4px 14px; border-radius: 99px; }
-
-    .card {
-      background: var(--card);
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 18px;
-      border: 1px solid rgba(255,255,255,0.07);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    .font-script {
+      font-family: 'Great Vibes', cursive;
     }
 
-    h2, h3, h4 { font-family: 'Fredoka', cursive; }
-    h2 { font-size: 19px; margin-bottom: 6px; }
-
-    label { font-size: 11px; font-weight: 800; color: var(--dim); display: block; margin-top: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-    select, input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 5px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: #090e1a;
-      color: #fff;
-      font-size: 14px;
-      outline: none;
-      display: block;
+    .font-serif-royal {
+      font-family: 'Cormorant Garamond', serif;
     }
 
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    @media(max-width: 480px) { .grid-2 { grid-template-columns: 1fr; } }
-
-    .mascot-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      margin-top: 8px;
+    .gold-shimmer {
+      background: linear-gradient(90deg, #b8860b 0%, #f3d06b 25%, #d4af37 50%, #f8e192 75%, #b8860b 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s linear infinite;
     }
-    .m-btn {
-      background: #090e1a;
-      border: 2px solid transparent;
-      padding: 12px 2px;
-      border-radius: 12px;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 700;
+
+    @keyframes shimmer {
+      to { background-position: 200% center; }
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+
+    .animate-float {
+      animation: floatSlow 4.5s ease-in-out infinite;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 20px 50px -15px rgba(157, 59, 83, 0.14);
+    }
+
+    /* Royal Envelope Animation */
+    .envelope-wrapper {
+      perspective: 1000px;
       cursor: pointer;
-      user-select: none;
     }
-    .m-btn.active { border-color: var(--accent); background: rgba(56, 189, 248, 0.25); }
 
-    .btn-main {
+    .envelope {
+      position: relative;
       width: 100%;
-      background: linear-gradient(135deg, #0284c7, #38bdf8);
-      color: #fff;
-      border: none;
-      padding: 15px;
-      border-radius: 14px;
-      font-family: 'Fredoka', cursive;
-      font-size: 18px;
-      cursor: pointer;
-      margin-top: 16px;
-      display: block;
-      text-align: center;
-      user-select: none;
+      max-width: 440px;
+      height: 270px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #f9c6d4 0%, #f3a6bc 100%);
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(157, 59, 83, 0.25);
+      transition: transform 0.4s ease;
     }
-    .btn-main:active { transform: scale(0.98); }
 
-    #mission-view { display: none; }
+    .envelope:hover {
+      transform: translateY(-4px);
+    }
 
-    .mentor-card {
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 150px;
+      background: linear-gradient(180deg, #ee94ae 0%, #f6b3c6 100%);
+      clip-path: polygon(0 0, 50% 85%, 100% 0);
+      transform-origin: top;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 4;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .envelope.open .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-pocket {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(255,255,255,0) 35%, #f5adc2 36%, #eb90ab 100%);
+      clip-path: polygon(0 28%, 50% 68%, 100% 28%, 100% 100%, 0 100%);
+      z-index: 3;
+      border-radius: 0 0 16px 16px;
+    }
+
+    .wax-seal {
+      position: absolute;
+      top: 104px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #f6d365, #d4af37 60%, #997a15);
+      box-shadow: 0 6px 16px rgba(153, 122, 21, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+      z-index: 5;
       display: flex;
       align-items: center;
-      gap: 12px;
-      background: #090e1a;
+      justify-content: center;
+      font-size: 24px;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .envelope.open .wax-seal {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.5);
+      pointer-events: none;
+    }
+
+    .letter-paper {
+      position: absolute;
+      bottom: 14px;
+      left: 4%;
+      width: 92%;
+      height: 225px;
+      background: #fffdfb;
       border-radius: 14px;
-      padding: 12px;
-      border-left: 4px solid var(--gold);
-      margin-bottom: 16px;
-    }
-    .mentor-img { width: 55px; height: 55px; object-fit: contain; }
-    .mentor-txt { font-size: 13px; font-weight: 700; color: var(--gold); line-height: 1.4; white-space: pre-line; }
-
-    .bar-item { margin-bottom: 12px; }
-    .bar-meta { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; margin-bottom: 4px; }
-    .bar-track { background: rgba(255,255,255,0.08); height: 10px; border-radius: 6px; overflow: hidden; }
-    .bar-prog { height: 100%; background: linear-gradient(90deg, #38bdf8, #818cf8); width: 0%; transition: width 0.7s; }
-
-    .focus-console {
-      background: #090e1a;
-      border-radius: 16px;
-      padding: 16px;
-      text-align: center;
-      margin-top: 14px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .big-clock {
-      font-family: 'Fredoka', cursive;
-      font-size: 48px;
-      color: #fb923c;
-      letter-spacing: 2px;
-      margin: 4px 0;
-    }
-    .timer-btn-row { display: flex; justify-content: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
-    .t-btn { padding: 10px 18px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; color: #fff; font-size: 13px; }
-
-    .live-tags {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px dashed rgba(255,255,255,0.1);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .quiz-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 999;
       padding: 20px;
+      z-index: 2;
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.6s ease, box-shadow 0.6s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      border: 1px solid #f4dcd6;
+      overflow: hidden;
+    }
+
+    .envelope.open .letter-paper {
+      transform: translateY(-210px);
+      height: 370px;
+      z-index: 6;
+      box-shadow: 0 20px 45px rgba(212, 175, 55, 0.35);
       overflow-y: auto;
+      padding: 20px 18px;
     }
-    .quiz-modal {
-      background: var(--card);
-      border-radius: 18px;
-      padding: 20px;
-      max-width: 500px;
-      margin: 40px auto;
-      border: 1.5px solid var(--accent);
+
+    @media (max-width: 480px) {
+      .envelope.open .letter-paper {
+        transform: translateY(-195px);
+        height: 350px;
+        left: -2%;
+        width: 104%;
+        padding: 18px 15px;
+      }
     }
-    .q-opt-btn {
-      display: block;
-      width: 100%;
-      background: #090e1a;
-      border: 1px solid rgba(255,255,255,0.15);
-      color: #fff;
-      padding: 12px;
-      margin-top: 8px;
-      border-radius: 10px;
-      text-align: left;
-      font-size: 13px;
-      font-weight: 600;
+
+    /* 3D Flip Card for Reasons */
+    .flip-card {
+      perspective: 1000px;
+      height: 190px;
       cursor: pointer;
     }
 
-    #final-report {
-      display: none;
-      background: linear-gradient(180deg, #131c31 0%, #0d1527 100%);
-      border: 2px solid var(--gold);
-    }
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin: 14px 0;
-    }
-    .kpi-card {
-      background: #090e1a;
-      padding: 12px;
-      border-radius: 12px;
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
       text-align: center;
-      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
     }
-    .kpi-val { font-size: 20px; font-weight: 800; color: var(--accent); margin-top: 2px; }
-    .badge-shelf {
+
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 20px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
-    .badge-chip {
-      background: rgba(250, 204, 21, 0.15);
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-size: 11px;
-      font-weight: 800;
-      padding: 6px 12px;
-      border-radius: 8px;
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(135deg, #9d3b53 0%, #c04e6b 100%);
+      color: #fff;
+    }
+
+    /* Floating Petals Canvas */
+    #petalCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
     }
   </style>
 </head>
-<body ontouchstart="">
+<body class="selection:bg-pink-200 selection:text-rose-900">
 
-  <header>
-    <div class="brand">⚡ StudyPath Hub</div>
-    <div class="xp-pill">⭐ XP: <span id="user-xp">100</span></div>
+  <canvas id="petalCanvas"></canvas>
+
+  <!-- Top Pill Badge -->
+  <nav class="sticky top-0 z-40 px-4 py-3 flex items-center justify-center max-w-5xl mx-auto">
+    <div class="glass-card px-5 py-2 rounded-full flex items-center gap-2 text-xs sm:text-sm font-semibold text-rose-800 shadow-sm">
+      <span>📅 November 18</span>
+      <span class="text-amber-500">✦</span>
+      <span>National Princess Day</span>
+      <span class="text-amber-500">✦</span>
+      <span>For Jyotuu 👑</span>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="relative pt-8 pb-16 px-4 text-center max-w-4xl mx-auto">
+    <div class="inline-block animate-float mb-3">
+      <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-amber-200 via-yellow-100 to-pink-100 border-2 border-amber-300 shadow-lg flex items-center justify-center text-4xl">
+        👑
+      </div>
+    </div>
+
+    <p class="uppercase tracking-[0.25em] text-xs sm:text-sm font-bold text-rose-500 mb-3">
+      Royal Proclamation • Every Day &amp; Always
+    </p>
+
+    <h1 class="font-script text-6xl sm:text-7xl md:text-8xl gold-shimmer leading-tight py-2 drop-shadow-sm">
+      Happy Princess Day, Jyotuu
+    </h1>
+
+    <p class="font-serif-royal italic text-xl sm:text-2xl text-rose-900/80 max-w-2xl mx-auto mt-3 leading-relaxed">
+      “A crown isn't made of gold and jewels—it's made of the grace, warmth, and magic you bring into my world every single day.”
+    </p>
+
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <a href="#royal-letter" class="px-7 py-3.5 rounded-full bg-gradient-to-r from-rose-600 to-pink-500 text-white font-semibold shadow-lg shadow-rose-300/60 hover:scale-105 transition transform flex items-center gap-2">
+        <span>💌</span> Open Your Royal Letter
+      </a>
+      <button onclick="triggerRoyalShower()" class="px-6 py-3.5 rounded-full glass-card text-rose-800 font-semibold hover:bg-white transition flex items-center gap-2 cursor-pointer">
+        <span>✨</span> Shower Her With Petals
+      </button>
+    </div>
   </header>
 
-  <div class="card" id="form-card">
-    <h2>🎯 All-India NCERT & Competitive Mission</h2>
-    <p style="color: var(--dim); font-size: 12px;">Full syllabus tracking across Class 6–12, JEE, NEET & CA Foundation.</p>
+  <!-- Interactive Sealed Letter Section -->
+  <section id="royal-letter" class="py-12 px-4 max-w-3xl mx-auto text-center">
+    <h2 class="font-serif-royal text-3xl sm:text-4xl font-bold text-rose-950 mb-2">
+      A Sealed Decree From My Heart
+    </h2>
+    <p class="text-sm text-rose-700/80 mb-14">Tap the golden wax seal to open your letter, Jyotuu</p>
 
-    <label>Exam / Standard Category</label>
-    <select id="sel-cat">
-      <option value="Class 11-12 Commerce">Class 11–12: Commerce (CBSE / State)</option>
-      <option value="Class 11-12 Science">Class 11–12: Science (CBSE / State)</option>
-      <option value="Class 11-12 Arts">Class 11–12: Arts & Humanities</option>
-      <option value="Class 9-10 Secondary">Class 9–10 (Secondary Board NCERT)</option>
-      <option value="Class 6-8 Middle">Class 6–8 (Middle School NCERT)</option>
-      <option value="JEE Main & Adv">Competitive: JEE Main & Advanced</option>
-      <option value="NEET UG Medical">Competitive: NEET UG Medical</option>
-      <option value="CA Foundation">Competitive: CA Foundation (ICAI)</option>
-    </select>
+    <div class="pt-44 pb-8">
+      <div class="envelope-wrapper" onclick="toggleEnvelope()">
+        <div id="envelope" class="envelope">
+          <div class="envelope-flap"></div>
+          <div class="wax-seal" title="Tap to open">👑</div>
 
-    <div class="grid-2">
-      <div>
-        <label>Subject</label>
-        <select id="sel-sub">
-          <optgroup label="Class 11-12 Commerce">
-            <option value="Accountancy" selected>Accountancy</option>
-            <option value="Business Studies">Business Studies</option>
-            <option value="Economics">Economics</option>
-            <option value="English Core">English Core</option>
-          </optgroup>
-          <optgroup label="Class 11-12 Science">
-            <option value="Physics">Physics</option>
-            <option value="Chemistry">Chemistry</option>
-            <option value="Mathematics">Mathematics</option>
-            <option value="Biology">Biology</option>
-          </optgroup>
-          <optgroup label="Competitive Tracks">
-            <option value="JEE Physics/Maths">JEE Physics & Maths</option>
-            <option value="NEET Biology/Chem">NEET Biology & Chemistry</option>
-            <option value="CA Accounting/Laws">CA Accounting & Laws</option>
-          </optgroup>
-          <optgroup label="Class 6 to 10">
-            <option value="Secondary Math & Science">Class 9-10 Math & Science</option>
-            <option value="Middle School Foundation">Class 6-8 Foundation</option>
-          </optgroup>
-        </select>
-      </div>
-      <div>
-        <label>NCERT / Exam Topic</label>
-        <select id="sel-chap">
-          <optgroup label="Accountancy & Commerce">
-            <option value="Rules of Debit/Credit & Journal" selected>Rules of Debit/Credit & Journal</option>
-            <option value="Ledger & Trial Balance">Ledger & Trial Balance</option>
-            <option value="Bank Reconciliation Statement (BRS)">Bank Reconciliation Statement (BRS)</option>
-            <option value="Depreciation & Provisions">Depreciation & Provisions</option>
-            <option value="Financial Statements of Sole Proprietorship">Financial Statements</option>
-            <option value="Nature & Purpose of Business">Nature & Purpose of Business</option>
-            <option value="Consumer Equilibrium & Demand">Consumer Equilibrium & Demand</option>
-          </optgroup>
-          <optgroup label="Science & Competitive">
-            <option value="Laws of Motion & Mechanics">Laws of Motion & Mechanics</option>
-            <option value="Chemical Bonding & Thermodynamics">Chemical Bonding & Thermodynamics</option>
-            <option value="Cell Biology & Human Physiology">Cell Biology & Human Physiology</option>
-            <option value="Calculus & Coordinate Geometry">Calculus & Coordinate Geometry</option>
-          </optgroup>
-          <optgroup label="Class 6 to 10 Boards">
-            <option value="Real Numbers, Polynomials & Linear Eq">Real Numbers & Equations</option>
-            <option value="Life Processes & Chemical Reactions">Life Processes & Reactions</option>
-            <option value="Integers, Fractions & Algebra Basics">Integers & Algebra Basics</option>
-          </optgroup>
-        </select>
+          <div class="letter-paper text-left flex flex-col justify-between" onclick="event.stopPropagation()">
+            <div>
+              <div class="flex items-center justify-between border-b border-rose-100 pb-2 mb-3 sticky top-0 bg-[#fffdfb] z-10">
+                <span class="font-script text-2xl sm:text-3xl text-rose-600">Dearest Jyotuu,</span>
+                <button onclick="toggleEnvelope()" class="text-xs font-semibold text-rose-500 hover:text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full cursor-pointer">Close ✕</button>
+              </div>
+              <p class="font-sans text-xs sm:text-sm leading-relaxed text-rose-950 whitespace-pre-line font-medium">HAPPYYYY PRINCESS DAYYYYY MERIIIIII JYOTUUUUUUUUU 👑😭🌸💗✨🤌🏻🫶🏻🌷💞
+
+Meri pyaariiiii si Jyotuuuuuu 😭🌸💗👑✨ aaj apka din haiiii aur mai apni sabse beautiful princess ko batana chahta hoon ki ap mere liye kitni zyada special hain 😭💗🌷🤌🏻✨ apki woh cute si smileeeee 🥹🌸 apki pyari pyari baatein 😭💞 apka gussa hona 🙈💗 apka mujhe daantna 😭🤌🏻 aur apki woh chhoti chhoti harkatein sab kuch mere liye bohot precious haiiii 🫠🌷💗✨
+
+Babyyyyyy 🥹🫶🏻💗 mai chahta hoon ki apki life hamesha khushiyon se bhari rahe 🌸🌷✨ apke saare dreams complete ho 😭💗 apko har woh happiness mile jo ap deserve karti hain 🤌🏻🥹👑 ap kabhi khud ko kam mat samajhna meri Princess because ap apni jagah bohot special hain 😭🌸💞
+
+Aur meri Jyotuuuuuu 🙈😭💗 mai hamesha apni mistakes samajhne aur khud ko better banane ki koshish karunga 🥹🫶🏻💗 mai chahta hoon ki apko mere saath respected loved aur understood feel ho 🌷✨🤌🏻
+
+Hamesha aise hi smile karte rehna meri Jyotuuuuuu 😭🌸💗🙈 apki smile bohot precious haiiii aur please apne dreams ko kabhi chhodna matttt 👑💞🌷 mai hamesha apko grow karte hue aur apni life mein successful hote hue dekhna chahta hoon 🥹✨💗
+
+ONCE AGAIN HAPPYYYY PRINCESS DAYYYYY MERIIIIII JYOTUUUUUUUUU 😭😭🌸💗👑🤌🏻✨🫶🏻🌷💞🙈 AP MERI FAVOURITE PRINCESS HAINNNN 😭💗🌸✨🤌🏻</p>
+            </div>
+            <div class="text-right pt-3 mt-3 border-t border-rose-100">
+              <p class="font-script text-2xl text-amber-600">Forever Yours ♥</p>
+            </div>
+          </div>
+
+          <div class="envelope-pocket"></div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="grid-2">
-      <div>
-        <label>Days Target</label>
-        <input type="number" id="inp-days" value="5" min="1" max="60">
-      </div>
-      <div>
-        <label>Daily Study Time (Hours)</label>
-        <input type="number" id="inp-hrs" value="2" min="1" max="12">
-      </div>
+  <!-- 6 Reasons Cards (Tap to Flip) -->
+  <section class="py-14 px-4 max-w-5xl mx-auto">
+    <div class="text-center mb-10">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-600">Tap Each Card</span>
+      <h2 class="font-serif-royal text-3xl sm:text-4xl font-bold text-rose-950 mt-1">
+        Why You Will Always Be My Princess
+      </h2>
     </div>
 
-    <label>Choose Mascot Partner</label>
-    <div class="mascot-row">
-      <button type="button" class="m-btn active" id="btn-luffy" onclick="window.pickBuddy('luffy')">👒 Luffy</button>
-      <button type="button" class="m-btn" id="btn-doraemon" onclick="window.pickBuddy('doraemon')">🔔 Doraemon</button>
-      <button type="button" class="m-btn" id="btn-shinchan" onclick="window.pickBuddy('shinchan')">🍫 Shin-chan</button>
-      <button type="button" class="m-btn" id="btn-pikachu" onclick="window.pickBuddy('pikachu')">⚡ Pikachu</button>
-    </div>
-
-    <button type="button" class="btn-main" onclick="window.startMission()">🚀 Launch Action Mission</button>
-  </div>
-
-  <div class="card" id="mission-view">
-    <h2>📊 Active Study Mission</h2>
-
-    <div class="mentor-card">
-      <img id="mascot-img" class="mentor-img" src="https://upload.wikimedia.org/wikipedia/en/c/cb/Monkey_D_Luffy.png" alt="Mascot">
-      <div id="mascot-quote" class="mentor-txt">Ore wa Luffy! Target lock kar liya hai, ab poora syllabus conquer karenge! 🍖🔥</div>
-    </div>
-
-    <div style="background:#090e1a; padding:14px; border-radius:14px; margin-bottom:14px;">
-      <div class="bar-item">
-        <div class="bar-meta"><span>1. NCERT Theory & Core Foundation</span><span id="t-stg1">4.0 hrs (40%)</span></div>
-        <div class="bar-track"><div class="bar-prog" id="prog1" style="width:40%;"></div></div>
-      </div>
-      <div class="bar-item">
-        <div class="bar-meta"><span>2. In-Text Examples, PYQs & Exercises</span><span id="t-stg2">3.5 hrs (35%)</span></div>
-        <div class="bar-track"><div class="bar-prog" id="prog2" style="width:35%;"></div></div>
-      </div>
-      <div class="bar-item">
-        <div class="bar-meta"><span>3. 25-Min Sprints & Formula/Keyword Revision</span><span id="t-stg3">2.5 hrs (25%)</span></div>
-        <div class="bar-track"><div class="bar-prog" id="prog3" style="width:25%;"></div></div>
-      </div>
-    </div>
-
-    <div class="focus-console">
-      <h3>⏱️ 25-Minute Focus Sprint</h3>
-      <p style="font-size:11px; color:var(--dim);">Interval complete hote hi 25-min MCQ pop-up aayega!</p>
-      <div class="big-clock" id="display-time">25:00</div>
-      
-      <div class="timer-btn-row">
-        <button type="button" class="t-btn" style="background:var(--green);" onclick="window.runTimer()">Start Sprint</button>
-        <button type="button" class="t-btn" style="background:var(--red);" onclick="window.haltTimer()">Pause</button>
-        <button type="button" class="t-btn" style="background:var(--purple);" onclick="window.trigger2HourGrandQuiz()">Finish & Grand Quiz 🏆</button>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front glass-card">
+            <span class="text-4xl mb-3">🌸</span>
+            <h3 class="font-serif-royal text-2xl font-bold text-rose-900">Your Cute Smile</h3>
+            <p class="text-xs text-rose-500 mt-2">Tap to reveal ✨</p>
+          </div>
+          <div class="flip-card-back shadow-xl">
+            <p class="font-serif-royal italic text-xl leading-relaxed">
+              “Ek chhoti si smile se hi mera poora din ban jata hai, Jyotuu. You light up everything around you.”
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div class="live-tags">
-        <div>⏸️ Pauses: <span id="stat-pause" style="color:var(--gold);">0</span></div>
-        <div>👀 Screen Exits: <span id="stat-away" style="color:var(--red);">0</span></div>
-        <div>⏳ Studied: <span id="stat-min" style="color:var(--accent);">0 min</span></div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front glass-card">
+            <span class="text-4xl mb-3">🙈</span>
+            <h3 class="font-serif-royal text-2xl font-bold text-rose-900">Your Cute Gussa &amp; Daant</h3>
+            <p class="text-xs text-rose-500 mt-2">Tap to reveal ✨</p>
+          </div>
+          <div class="flip-card-back shadow-xl">
+            <p class="font-serif-royal italic text-xl leading-relaxed">
+              “Apka pyaar se gussa hona aur mujhe daantna bhi mujhe sabse zyada pyaara lagta hai.”
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="quiz-overlay" id="pop-sprint-quiz">
-    <div class="quiz-modal">
-      <h3 style="color:var(--gold);">⚡ 25-Min Sprint Checkpoint Quiz</h3>
-      <p style="font-size:12px; color:var(--dim); margin-bottom:10px;">Sprint complete! Is checkpoint ka jawab dekar Sprint Badge unlock karo:</p>
-      <div id="sq-question" style="font-weight:700; margin-bottom:10px;">What is the single most important rule to excel in this chapter?</div>
-      <div id="sq-choices">
-        <button type="button" class="q-opt-btn" onclick="window.answerSprint(true)">Consistent conceptual practice and solving exercise questions</button>
-        <button type="button" class="q-opt-btn" onclick="window.answerSprint(false)">Ratta marna without understanding concepts</button>
-        <button type="button" class="q-opt-btn" onclick="window.answerSprint(false)">Skipping notes and reading direct on exam night</button>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front glass-card">
+            <span class="text-4xl mb-3">✨</span>
+            <h3 class="font-serif-royal text-2xl font-bold text-rose-900">Your Little Harkatein</h3>
+            <p class="text-xs text-rose-500 mt-2">Tap to reveal ✨</p>
+          </div>
+          <div class="flip-card-back shadow-xl">
+            <p class="font-serif-royal italic text-xl leading-relaxed">
+              “Apki chhoti-chhoti baatein aur cute harkatein mere liye duniya ki sabse precious cheez hain.”
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="quiz-overlay" id="pop-grand-quiz">
-    <div class="quiz-modal" style="border-color:var(--gold);">
-      <h3 style="color:var(--gold);">🏆 2-Hour Grand Mastery Exam</h3>
-      <p style="font-size:12px; color:var(--dim); margin-bottom:12px;">Hard focus complete ho gaya! Final syllabus audit report ke liye test submit karo:</p>
-      <div style="margin-bottom:10px; font-weight:700;">Q1. Primary success factor in competitive/board exams?</div>
-      <button type="button" class="q-opt-btn" style="background:#0284c7; margin-bottom:8px;">Consistent revision & numerical problem solving</button>
-      <button type="button" class="btn-main" style="background:var(--green); margin-top:14px;" onclick="window.submitGrandQuiz()">Submit & View Full Audit Chart</button>
-    </div>
-  </div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front glass-card">
+            <span class="text-4xl mb-3">🌷</span>
+            <h3 class="font-serif-royal text-2xl font-bold text-rose-900">Your Big Dreams</h3>
+            <p class="text-xs text-rose-500 mt-2">Tap to reveal ✨</p>
+          </div>
+          <div class="flip-card-back shadow-xl">
+            <p class="font-serif-royal italic text-xl leading-relaxed">
+              “Apke har sapne ke peeche main hamesha khada hoon—apko grow aur shine karte dekhna meri sabse badi khushi hai.”
+            </p>
+          </div>
+        </div>
+      </div>
 
-  <div class="card" id="final-report">
-    <h2 style="color:var(--gold);">🏁 Final Session Audit & Mastery Forecast</h2>
-    <p style="font-size:12px; color:var(--dim);">Detailed breakdown of your session intensity, distractions, and completion timeline.</p>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front glass-card">
+            <span class="text-4xl mb-3">🫶🏻</span>
+            <h3 class="font-serif-royal text-2xl font-bold text-rose-900">Always Respected &amp; Loved</h3>
+            <p class="text-xs text-rose-500 mt-2">Tap to reveal ✨</p>
+          </div>
+          <div class="flip-card-back shadow-xl">
+            <p class="font-serif-royal italic text-xl leading-relaxed">
+              “Main hamesha koshish karunga ki apko mere saath sabse zyada loved, respected aur understood feel ho.”
+            </p>
+          </div>
+        </div>
+      </div>
 
-    <div class="kpi-grid">
-      <div class="kpi-card">
-        <div style="font-size:11px; color:var(--dim);">Total Focus Time</div>
-        <div class="kpi-val" id="rep-time">25 min</div>
-      </div>
-      <div class="kpi-card">
-        <div style="font-size:11px; color:var(--dim);">Focus Efficiency</div>
-        <div class="kpi-val" id="rep-eff" style="color:var(--green);">94%</div>
-      </div>
-      <div class="kpi-card">
-        <div style="font-size:11px; color:var(--dim);">Breaks / Pauses</div>
-        <div class="kpi-val" id="rep-pause" style="color:var(--gold);">1</div>
-      </div>
-      <div class="kpi-card">
-        <div style="font-size:11px; color:var(--dim);">Screen Exits / Distractions</div>
-        <div class="kpi-val" id="rep-distract" style="color:var(--red);">0</div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front glass-card">
+            <span class="text-4xl mb-3">👑</span>
+            <h3 class="font-serif-royal text-2xl font-bold text-rose-900">My Favourite Princess</h3>
+            <p class="text-xs text-rose-500 mt-2">Tap to reveal ✨</p>
+          </div>
+          <div class="flip-card-back shadow-xl">
+            <p class="font-serif-royal italic text-xl leading-relaxed">
+              “Sirf aaj hi nahi, har ek din ap meri favourite princess hain—today, tomorrow, and forever.”
+            </p>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div style="background:#090e1a; padding:14px; border-radius:14px; border-left:4px solid var(--accent); margin:12px 0;">
-      <h4 style="color:var(--accent);">📈 Syllabus Completion Forecast</h4>
-      <p id="rep-forecast" style="font-size:13px; margin-top:4px; line-height:1.5;">
-        Target track has approximately <strong>24 Chapters</strong>.<br>
-        Tere current <strong>2 Hrs/Day</strong> pace aur <strong>94% Focus Score</strong> ke hisaab se:<br>
-        ⚡ Poora syllabus <strong>36 dino</strong> mein complete ho jayega!
+  <!-- Interactive Royal Voucher / Gift Claim -->
+  <section class="py-12 px-4 max-w-2xl mx-auto">
+    <div class="glass-card rounded-3xl p-8 sm:p-10 text-center border-2 border-amber-200/80 relative overflow-hidden">
+      <div class="inline-block px-4 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-wider mb-4">
+        🎟️ Official Royal Decree
+      </div>
+      <h3 class="font-serif-royal text-3xl sm:text-4xl font-bold text-rose-950 mb-3">
+        One Unlimited Princess Treatment Pass
+      </h3>
+      <p class="text-sm sm:text-base text-rose-800/80 max-w-md mx-auto mb-6">
+        Valid for: Your favourite treats, endless pampering, zero arguments, and being treated like total royalty whenever you want.
+      </p>
+      <button id="claimBtn" onclick="claimGift()" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-500 text-white font-bold shadow-lg shadow-amber-300/60 hover:scale-105 transition transform cursor-pointer">
+        👑 Claim Your Royal Crown &amp; Pass
+      </button>
+      <p id="claimMessage" class="hidden mt-4 text-sm font-semibold text-rose-700 animate-pulse">
+        ✨ Officially Redeemed by Princess Jyotuu! Screenshot this &amp; send it to claim anytime 💗👑
       </p>
     </div>
+  </section>
 
-    <div style="margin-top:10px;">
-      <h4 style="font-size:14px; color:var(--gold);">🎖️ Earned Session Badges:</h4>
-      <div class="badge-shelf" id="rep-badges">
-        <div class="badge-chip">🌟 Mission Initiator</div>
-        <div class="badge-chip">🏅 25-Min Sprint Conqueror</div>
-        <div class="badge-chip">🎖️ 2-Hour Grand Exam Master</div>
-      </div>
-    </div>
-  </div>
+  <!-- Footer -->
+  <footer class="py-10 text-center text-xs text-rose-700/70">
+    <p>Made with endless love for <strong>Jyotuu</strong> • Happy National Princess Day 👑🌸</p>
+  </footer>
 
   <script>
-    var buddies = {
-      luffy: {
-        img: "https://upload.wikimedia.org/wikipedia/en/c/cb/Monkey_D_Luffy.png",
-        quote: "Ore wa Luffy! Target lock kar liya hai, ab poora syllabus conquer karenge! 🍖🔥"
-      },
-      doraemon: {
-        img: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
-        quote: "Maine schedule optimize kar diya hai! Nobita ki tarah distract mat hona, sprint timer on karo! 🔔"
-      },
-      shinchan: {
-        img: "https://upload.wikimedia.org/wikipedia/en/7/70/Shin-chan.png",
-        quote: "Arre waah! Itna solid timetable? Ek 25-min ka sprint nikalo, choco-chips khayenge! 😂🍫"
-      },
-      pikachu: {
-        img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-        quote: "Pika-Pikachu! High-focus streak on rakho, intervals crack karke XP earn karenge! ⚡🌟"
+    function toggleEnvelope() {
+      const env = document.getElementById('envelope');
+      env.classList.toggle('open');
+      if (env.classList.contains('open')) {
+        triggerRoyalShower();
       }
-    };
+    }
 
-    var activeBuddy = 'luffy';
+    function claimGift() {
+      const btn = document.getElementById('claimBtn');
+      const msg = document.getElementById('claimMessage');
+      btn.innerHTML = '👑 Royal Pass Activated!';
+      btn.classList.remove('from-amber-500', 'via-yellow-500', 'to-amber-500');
+      btn.classList.add('bg-rose-600');
+      msg.classList.remove('hidden');
+      triggerRoyalShower();
+    }
 
-    window.pickBuddy = function(key) {
-      activeBuddy = key;
-      document.querySelectorAll('.m-btn').forEach(function(b) { b.classList.remove('active'); });
-      var el = document.getElementById('btn-' + key);
-      if (el) el.classList.add('active');
-    };
+    const canvas = document.getElementById('petalCanvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
 
-    window.startMission = function() {
-      var d = parseInt(document.getElementById('inp-days').value) || 5;
-      var h = parseInt(document.getElementById('inp-hrs').value) || 2;
-      var total = d * h;
-      var sub = document.getElementById('sel-sub').value;
-      var chap = document.getElementById('sel-chap').value;
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
 
-      var view = document.getElementById('mission-view');
-      view.style.display = 'block';
+    const particles = [];
+    const symbols = ['🌸', '✨', '💖', '👑', '🌷'];
 
-      document.getElementById('mascot-img').src = buddies[activeBuddy].img;
-      document.getElementById('mascot-quote').innerText = buddies[activeBuddy].quote + '\n\n🎯 Target: ' + sub + ' — ' + chap;
+    class Particle {
+      constructor(burst = false) {
+        this.x = burst ? width / 2 + (Math.random() - 0.5) * 260 : Math.random() * width;
+        this.y = burst ? height / 2 : -20 - Math.random() * height;
+        this.size = 14 + Math.random() * 12;
+        this.speedY = burst ? -4 - Math.random() * 6 : 1 + Math.random() * 1.8;
+        this.speedX = burst ? (Math.random() - 0.5) * 8 : (Math.random() - 0.5) * 1.2;
+        this.gravity = burst ? 0.18 : 0;
+        this.opacity = 0.85;
+        this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        this.burst = burst;
+      }
 
-      document.getElementById('t-stg1').innerText = (total * 0.4).toFixed(1) + ' hrs (40%)';
-      document.getElementById('t-stg2').innerText = (total * 0.35).toFixed(1) + ' hrs (35%)';
-      document.getElementById('t-stg3').innerText = (total * 0.25).toFixed(1) + ' hrs (25%)';
+      update() {
+        this.speedY += this.gravity;
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.burst) {
+          this.opacity -= 0.012;
+        } else if (this.y > height + 20) {
+          this.y = -20;
+          this.x = Math.random() * width;
+        }
+      }
 
-      view.scrollIntoView({ behavior: 'smooth' });
-    };
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.opacity);
+        ctx.font = `${this.size}px serif`;
+        ctx.fillText(this.symbol, this.x, this.y);
+        ctx.restore();
+      }
+    }
 
-    var timerId = null;
-    var sprintSeconds = 25 
+    for (let i = 0; i < 22; i++) {
+      particles.push(new Particle(false));
+    }
+
+    function triggerRoyalShower() {
+      for (let i = 0; i < 38; i++) {
+        particles.push(new Particle(true));
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.update();
+        p.draw();
+        if (p.burst && p.opacity <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
